@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El preu de viure a Castelló · CGT</title>
+<meta name="description" content="Guia sobre l'estat de l'habitatge a Castelló i comarques. No ets tu: és el capitalisme.">
+</head>
+<body style="margin:0">
+
+<!-- ============================================================
+     EL PREU DE VIURE A CASTELLÓ · CGT Castelló
+     Tot va namespaced sota .hb — es pot pegar sencer en un
+     Raw HTML de WPBakery sobre una plantilla en blanc.
+     Les dades marcades [DADA] o [FONT] s'han de tancar abans de publicar.
+     ============================================================ -->
+<div class="hb">
+<style>
+/* ---------- Base ---------- */
+.hb{--fons:#f4f2ed;--roig:#d81f1f;--negre:#1b1a18;--gris:#5f5e59;--linia:#ddd9d0;
+  background:var(--fons);color:var(--negre);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;}
+.hb *,.hb *::before,.hb *::after{box-sizing:border-box;}
+.hb p{line-height:1.62;}
+.hb__int{max-width:760px;margin:0 auto;padding:0 22px;}
+.hb__estret{max-width:600px;}
+
+/* ---------- Tipografia ---------- */
+.hb__display{font-weight:300;letter-spacing:.01em;line-height:1.03;text-transform:uppercase;
+  font-size:clamp(2.4rem,8.5vw,5.2rem);margin:0;}
+.hb__h2{font-weight:300;letter-spacing:.02em;text-transform:uppercase;line-height:1.1;
+  font-size:clamp(1.7rem,4.6vw,2.7rem);margin:0 0 22px;}
+.hb__dalt{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;
+  color:var(--roig);margin:0 0 12px;}
+.hb__cos{font-size:1.06rem;color:#2e2c28;margin:0 0 18px;}
+.hb__peu{font-size:.83rem;color:var(--gris);line-height:1.55;margin:14px 0 0;}
+.hb__peu strong{color:#8a8378;font-weight:600;}
+
+/* ---------- Revelat en scroll ---------- */
+.hb-rev{opacity:0;transform:translateY(26px);
+  transition:opacity .85s cubic-bezier(.2,.7,.3,1),transform .85s cubic-bezier(.2,.7,.3,1);}
+.hb-rev.is-vis{opacity:1;transform:none;}
+
+/* ---------- Portada ---------- */
+.hb__portada{position:relative;min-height:96vh;display:flex;flex-direction:column;
+  justify-content:flex-start;padding-top:14vh;overflow:hidden;}
+.hb__portadaTxt{position:relative;z-index:2;}
+.hb__marca{font-size:.75rem;letter-spacing:.24em;font-weight:700;color:var(--roig);
+  text-transform:uppercase;margin:0 0 24px;}
+.hb__subtitol{font-size:clamp(1rem,2.6vw,1.25rem);color:var(--gris);max-width:34ch;
+  margin:22px 0 0;line-height:1.5;}
+.hb__lema{margin:28px 0 0;font-size:clamp(1.15rem,3.4vw,1.6rem);font-weight:700;
+  text-transform:uppercase;letter-spacing:.02em;line-height:1.18;}
+.hb__lema span{color:var(--roig);}
+.hb__ciutat{position:absolute;left:50%;bottom:-2vh;width:150%;max-width:1500px;
+  transform:translateX(-50%);z-index:1;pointer-events:none;}
+.hb__ciutat svg{display:block;width:100%;height:auto;}
+.hb__avall{position:absolute;left:22px;bottom:22px;z-index:3;font-size:.72rem;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--gris);}
+
+/* ---------- Bandes ---------- */
+.hb__banda{padding:clamp(64px,11vw,120px) 0;}
+.hb__banda--negre{background:var(--negre);color:#f2f0eb;}
+.hb__banda--negre .hb__cos{color:#cfccc4;}
+.hb__banda--negre .hb__peu{color:#8b877f;}
+.hb__banda--negre .hb__peu strong{color:#a8a49b;}
+.hb__banda--roig{background:var(--roig);color:#fff;}
+.hb__banda--roig .hb__cos{color:#ffe9e9;}
+.hb__banda--roig .hb__dalt{color:#ffd7d7;}
+.hb__banda--roig .hb__peu{color:#ffc9c9;}
+.hb__banda--roig .hb__peu strong{color:#fff;}
+.hb__cita{font-size:clamp(1.5rem,4.4vw,2.4rem);font-weight:300;line-height:1.22;
+  text-transform:uppercase;letter-spacing:.02em;margin:0;}
+
+/* ---------- Punts numerats (els 9 del tríptic) ---------- */
+.hb__punt{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;
+  padding:26px 0;border-top:1px solid var(--linia);}
+.hb__banda--negre .hb__punt{border-top-color:#39362f;}
+.hb__banda--roig .hb__punt{border-top-color:#f07d7d;}
+.hb__num{font-size:2.6rem;font-weight:300;line-height:.85;color:var(--roig);
+  font-variant-numeric:tabular-nums;}
+.hb__banda--negre .hb__num{color:var(--roig);}
+.hb__banda--roig .hb__num{color:#fff;}
+.hb__punt p{margin:0;font-size:1.02rem;}
+
+/* ---------- Contenidors d'animació ---------- */
+.hb__anim{margin:34px 0 0;}
+.hb__anim svg{display:block;width:100%;height:auto;}
+.hb__cartell{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:16px 0 0;}
+.hb__gran{font-size:clamp(2.2rem,7vw,3.2rem);font-weight:800;color:var(--roig);
+  font-variant-numeric:tabular-nums;line-height:1;}
+.hb__llegir{font-size:1rem;max-width:32ch;line-height:1.35;}
+
+/* ---------- Tancament ---------- */
+.hb__cta{padding:clamp(60px,10vw,110px) 0 clamp(70px,12vw,130px);text-align:left;}
+.hb__boto{display:inline-block;margin-top:26px;background:var(--roig);color:#fff;
+  text-decoration:none;padding:15px 30px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;font-size:.85rem;border-radius:2px;}
+.hb__boto:hover{background:#b81919;}
+.hb__boto:focus-visible{outline:3px solid var(--negre);outline-offset:3px;}
+.hb__contacte{margin:30px 0 0;font-size:.9rem;color:var(--gris);line-height:1.7;}
+
+@media (prefers-reduced-motion:reduce){
+  .hb-rev{opacity:1;transform:none;transition:none;}
+  .hb__ciutat{transform:translateX(-50%) !important;}
+}
+</style>
+
+
+<!-- ==================== PORTADA ==================== -->
+<header class="hb__portada">
+  <div class="hb__int hb__portadaTxt">
+    <p class="hb__marca">CGT Castelló</p>
+    <h1 class="hb__display">El preu de<br>viure a<br>Castelló</h1>
+    <p class="hb__subtitol">Guia sobre l'estat de l'habitatge a Castelló i comarques.</p>
+    <p class="hb__lema">No ets tu.<br><span>És el capitalisme.</span></p>
+  </div>
+  <div class="hb__ciutat" id="hb-ciutat" aria-hidden="true"></div>
+  <p class="hb__avall">Desplaça't</p>
+</header>
+
+
+<!-- ==================== ON SOM ARA ==================== -->
+<section class="hb__banda">
+  <div class="hb__int">
+    <p class="hb__dalt hb-rev">On som ara?</p>
+    <h2 class="hb__h2 hb-rev">Tens feina i no arribes a final de mes.</h2>
+    <p class="hb__cos hb-rev">A hores d'ara vivim en una societat on hi ha gent que acumula
+      propietats i viu de l'ofici i l'esforç dels altres. On és impossible plantejar-se una
+      vida si no és en parella o compartint amb altres les despeses per sobreviure.</p>
+    <p class="hb__cos hb-rev">Un model econòmic i social que promou i posa en valor la
+      desigualtat i la violència estructural, de manera que la renda d'una xicoteta part de
+      la societat multiplica la de la classe treballadora, el jovent i els jubilats, que amb
+      prou feines poden accedir no ja a un habitatge propi, sinó a una situació en què portar
+      una vida estable i saludable.</p>
+  </div>
+</section>
+
+
+<!-- ==================== JUAN ROIG: EL MATEIX LLOGUER ==================== -->
+<section class="hb__banda hb__banda--negre">
+  <div class="hb__int">
+    <p class="hb__dalt hb-rev">El mateix rebut</p>
+    <h2 class="hb__h2 hb-rev">720 € de lloguer. Depèn de qui els pague.</h2>
+    <p class="hb__cos hb-rev hb__estret">Les dues columnes valen el mateix: un mes de
+      lloguer. Canvia el temps de treball que costa omplir-les.</p>
+
+    <div class="hb__anim hb-rev" id="hb-roig"></div>
+
+    <p class="hb__peu hb-rev">Retribució bruta de Juan Roig com a president de Mercadona:
+      12 milions d'euros anuals, la mateixa xifra des del 2023 segons els comptes d'Inmo-Alameda.
+      Càlcul sobre una jornada anual de 1.800 hores i un SMI de 16.576 € bruts l'any
+      (14 pagues). <strong>[Comprovar SMI i jornada de referència abans de publicar. El
+      tríptic diu «2 minuts»: amb la xifra de sou són uns 6-7 minuts; si s'hi sumen els
+      dividends, baixa de mig minut. Cal decidir quina de les dues coses es diu.]</strong></p>
+  </div>
+</section>
+
+
+<!-- ==================== SABIES QUE ==================== -->
+<section class="hb__banda">
+  <div class="hb__int">
+    <p class="hb__dalt hb-rev">Sabies que…?</p>
+    <h2 class="hb__h2 hb-rev">Un cub és un habitatge.</h2>
+
+    <div class="hb__anim hb-rev" id="hb-pila"></div>
+
+    <div class="hb__punt hb-rev">
+      <span class="hb__num">1</span>
+      <p>Només a Castelló de la Plana, 400 persones són propietàries de més de 15.000
+        habitatges i, d'aquestes, unes 20 n'acumulen més de 100 cadascuna.</p>
+    </div>
+    <div class="hb__punt hb-rev">
+      <span class="hb__num">2</span>
+      <p>El model es replica arreu de l'Estat: només un 1% de les rendes d'entre 30.000 i
+        60.000 € són de persones llogateres, mentre que en les rendes superiors a 600.000 €
+        el percentatge puja fins al 35%.
+        <em>[Redacció a revisar: al tríptic aquesta frase no s'entén i cal la font.]</em></p>
+    </div>
+    <div class="hb__punt hb-rev">
+      <span class="hb__num">3</span>
+      <p>Això és el producte directe de l'acumulació de capital en poques mans en prendre
+        l'habitatge no com un dret bàsic de totes les treballadores, sinó com un bé de mercat.</p>
+    </div>
+
+    <p class="hb__peu hb-rev"><strong>[Fonts a afegir abans de publicar.]</strong></p>
+  </div>
+</section>
+
+
+<!-- ==================== CITA ==================== -->
+<section class="hb__banda hb__banda--roig">
+  <div class="hb__int">
+    <p class="hb__cita hb-rev">És el mercado, amigo…</p>
+    <div class="hb__anim hb-rev" id="hb-euro"></div>
+  </div>
+</section>
+
+
+<!-- ==================== EL PREU ==================== -->
+<section class="hb__banda">
+  <div class="hb__int">
+    <p class="hb__dalt hb-rev">Deu anys</p>
+    <h2 class="hb__h2 hb-rev">El mateix pis, el doble de vida per pagar-lo.</h2>
+    <p class="hb__cos hb-rev hb__estret">El preu del m² de lloguer a la ciutat de Castelló ha
+      pujat gairebé un 60%. Un pis que el 2015 costava 450 € ara es lloga per 720 € com a
+      mínim, segons el barri. Resultat: els desnonaments per impagament del lloguer han pujat
+      un 74% a les comarques de Castelló.</p>
+
+    <div class="hb__anim hb-rev" id="hb-preu"></div>
+
+    <p class="hb__peu hb-rev">Cada parell té la seua pròpia escala: no es poden comparar entre
+      si. <strong>[Fonts i anys de referència a afegir. Els desnonaments es representen com a
+      índex perquè el tríptic només dóna la variació.]</strong></p>
+  </div>
+</section>
+
+
+<!-- ==================== L'ESFORÇ ==================== -->
+<section class="hb__banda hb__banda--negre">
+  <div class="hb__int">
+    <p class="hb__dalt hb-rev">Esforç de lloguer</p>
+    <h2 class="hb__h2 hb-rev">El pis és el mateix. El que et queda, no.</h2>
+
+    <div class="hb__anim hb-rev" id="hb-pis"></div>
+
+    <p class="hb__cartell hb-rev">
+      <span class="hb__gran" id="hb-pis-pct">0<span style="font-size:.55em">%</span></span>
+      <span class="hb__llegir" id="hb-pis-txt">del teu salari se'n va a pagar el lloguer</span>
+    </p>
+
+    <p class="hb__cos hb-rev" style="margin-top:26px">Cada treballadora dedica un 33% del seu
+      salari a pagar el lloguer, un 68% si té menys de 25 anys, a banda de les despeses
+      relacionades i el cost de la vida. El resultat és que any rere any som més i més
+      precàries. I ja estem fartes, perquè no: <strong>no està bé i no és normal</strong>.</p>
+    <p class="hb__peu hb-rev"><strong>[Font a afegir abans de publicar.]</strong></p>
+  </div>
+</section>
+
+
+<!-- ==================== NO ARRIBES A FINAL DE MES ==================== -->
+<section class="hb__banda">
+  <div class="hb__int">
+    <p class="hb__dalt hb-rev">No arribes a final de mes?</p>
+    <h2 class="hb__h2 hb-rev">Ni arribes ni arribaràs. Calma.</h2>
+
+    <div class="hb__punt hb-rev">
+      <span class="hb__num">4</span>
+      <p>Pots pensar que si treballes més ho aconseguiràs. Però a quin preu? Una promesa de
+        prosperitat que no arriba, a canvi del teu lleure, el temps compartit, el descans i la
+        salut. Et compren la vida present i futura a canvi de fum.</p>
+    </div>
+    <div class="hb__punt hb-rev">
+      <span class="hb__num">5</span>
+      <p>T'han dit que si renuncies a un café al dia podràs pagar-te les vacances somiades.
+        Passen els anys i l'únic que has aconseguit és sentiment de culpa per una xocolata de
+        tres euros, insomni perquè el cotxe fa un soroll estrany i tens pendent el rebut de
+        l'assegurança i les extraescolars. Un altre mes sense postres.</p>
+    </div>
+
+    <div class="hb__punt hb-rev">
+      <span class="hb__num">6</span>
+      <p>Una treballadora que estalvie un 10% del seu SMI cada mes podrà pagar l'entrada i les
+        despeses d'un habitatge en propietat en 16 anys. I el cost de sobreviure ha pujat un
+        24% mentrestant.</p>
+    </div>
+
+    <div class="hb__anim hb-rev" id="hb-escala"></div>
+    <p class="hb__cartell hb-rev">
+      <span class="hb__gran" id="hb-escala-anys">0</span>
+      <span class="hb__llegir">anys estalviant el 10% del SMI cada mes, només per a l'entrada</span>
+    </p>
+    <p class="hb__peu hb-rev"><strong>[Any de referència del +24% i fonts a afegir.]</strong></p>
+  </div>
+</section>
+
+
+<!-- ==================== EL QUE VOLEM ==================== -->
+<section class="hb__banda hb__banda--roig">
+  <div class="hb__int">
+    <p class="hb__dalt hb-rev">El que volem</p>
+    <h2 class="hb__h2 hb-rev">Volem el pa sencer.</h2>
+
+    <div class="hb__punt hb-rev">
+      <span class="hb__num">7</span>
+      <p>Viure millor. Que els factors socioeconòmics, entre ells l'habitatge, no suposen un
+        maldecap diari. Que l'ansietat no ens coste la salut mental i física. Gaudir de més
+        temps amb les nostres famílies i amigues. Descansar. Traure el consum del centre del
+        nostre esplai. Fer comunitat.</p>
+    </div>
+    <div class="hb__punt hb-rev">
+      <span class="hb__num">8</span>
+      <p>Que l'habitatge passe de ser un bé de mercat a un bé comú, gestionat des d'allò públic
+        pel benefici de veïns i veïnes. Un canvi radical que trenque les dinàmiques de mercat
+        que alimenten la desigualtat.</p>
+    </div>
+    <div class="hb__punt hb-rev">
+      <span class="hb__num">9</span>
+      <p>Aturar la trituradora de persones que és el sistema de producció i consum capitalista.
+        Deixar enrere un món on l'única recompensa són molletes mentre s'omplin les butxaques
+        de rendistes i milionaris.</p>
+    </div>
+    <div class="hb__anim hb-rev" id="hb-pa"></div>
+  </div>
+</section>
+
+
+<!-- ==================== TANCAMENT ==================== -->
+<section class="hb__banda">
+  <div class="hb__int">
+    <h2 class="hb__h2 hb-rev">Ni gent sense casa.<br>Ni cases sense gent.</h2>
+    <div class="hb__anim hb-rev" id="hb-encaix"></div>
+  </div>
+</section>
+
+<section class="hb__banda hb__banda--negre hb__cta">
+  <div class="hb__int">
+    <p class="hb__dalt hb-rev">Organitza't</p>
+    <h2 class="hb__h2 hb-rev">Lluita pel dret a sostre.</h2>
+    <p class="hb__cos hb-rev hb__estret">Sola no pots. Amb el sindicat, sí. Passa't per
+      l'Observatori de l'Habitatge de CGT i mira les dades que confirmen que any rere any la
+      classe treballadora està més empobrida.</p>
+    <a class="hb__boto hb-rev" href="[URL DE L'OBSERVATORI]">Visita l'Observatori</a>
+    <p class="hb__contacte hb-rev">
+      CGT Castelló · <a href="https://cgtcastello.org" style="color:#f2f0eb">cgtcastello.org</a><br>
+      <strong>[Correu i telèfon del sindicat]</strong>
+    </p>
+  </div>
+</section>
+
+</div><!-- /.hb -->
+
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  var quiet=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ============ Utillatge isomètric compartit ============ */
+  function el(n,a){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function pts(){return [].slice.call(arguments).map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1);}).join(' ');}
+  function Mon(S,ZS,OX,OY){
+    return {iso:function(u,v,z){return [OX+(u-v)*(S/2), OY+(u+v)*(S/4)-z*ZS];}, S:S, ZS:ZS};
+  }
+  function grup(pare){var g={n:el('g',{})};g.e=el('polygon',{});g.d=el('polygon',{});g.t=el('polygon',{});
+    g.n.appendChild(g.e);g.n.appendChild(g.d);g.n.appendChild(g.t);pare.appendChild(g.n);return g;}
+  function traç(g,c){['e','d','t'].forEach(function(f){g[f].setAttribute('stroke',c);g[f].setAttribute('stroke-width',.55);});}
+  function caixa(M,g,u0,u1,v0,v1,zb,zt,p){
+    var i=M.iso,A=i(u0,v0,zt),B=i(u1,v0,zt),C=i(u1,v1,zt),D=i(u0,v1,zt),
+        B0=i(u1,v0,zb),C0=i(u1,v1,zb),D0=i(u0,v1,zb);
+    g.e.setAttribute('points',pts(D,C,C0,D0));
+    g.d.setAttribute('points',pts(B,C,C0,B0));
+    g.t.setAttribute('points',pts(A,B,C,D));
+    if(p){g.e.setAttribute('fill',p.e);g.d.setAttribute('fill',p.d);g.t.setAttribute('fill',p.t);}}
+  function llavor(n){var s=n|0;return function(){s|=0;s=s+0x6D2B79F5|0;
+    var t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return ((t^t>>>14)>>>0)/4294967296;};}
+  function svgNou(pare,vb,etiqueta){
+    var s=el('svg',{viewBox:vb,role:'img','aria-label':etiqueta});
+    pare.appendChild(s);return s;}
+  function alVeure(node,fn){
+    if(quiet){fn();return;}
+    new IntersectionObserver(function(en,ob){if(en[0].isIntersecting){fn();ob.disconnect();}},
+      {threshold:.25}).observe(node);}
+
+  /* Paletes comunes */
+  var GRIS ={t:'#ddd8ce',d:'#c3beb3',e:'#a8a297'};
+  var ROIG ={t:'#ec4b4b',d:'#d81f1f',e:'#ab1616'};
+  var SOL  ={t:'#e6e2d9',d:'#d0ccc2',e:'#bab5a9'};
+  var FOSC ={t:'#3b372f',d:'#2d2a25',e:'#211f1b'};
+
+
+  /* ============ 1 · PORTADA: trama urbana (sense dades) ============ */
+  (function(){
+    var cont=document.getElementById('hb-ciutat'); if(!cont) return;
+    var svg=svgNou(cont,'0 0 1400 460','Trama urbana isomètrica de fons');
+    var M=Mon(74,74,700,120), rnd=llavor(20260816);
+    var N=13, illes=[];
+    for(var gx=0;gx<N;gx++) for(var gy=0;gy<N;gy++){
+      if(rnd()<0.13) continue;
+      var a=0.30+rnd()*0.62; if(rnd()<0.09) a+=0.55;
+      illes.push({u0:gx+0.09,u1:gx+0.91,v0:gy+0.09,v1:gy+0.91,alt:a,ordre:gx+gy,
+                  retard:(gx+gy)*46+rnd()*30});
+    }
+    illes.sort(function(a,b){return a.ordre-b.ordre;});
+    illes.forEach(function(b){
+      b.g=grup(svg); traç(b.g,'#c2bcaf'); b.fin=el('g',{}); b.g.n.appendChild(b.fin);
+    });
+    function geo(b,z){caixa(M,b.g,b.u0,b.u1,b.v0,b.v1,0,Math.max(z,0.001),
+      {t:'#fbfaf7',d:'#e6e3db',e:'#d3cfc5'});}
+    function finestres(b){
+      if(b.fet) return; b.fet=true;
+      var files=Math.max(1,Math.floor(b.alt*72/17)), cols=3, i=M.iso;
+      [[b.u1,true],[b.v1,false]].forEach(function(c,idx){
+        for(var q=0;q<cols;q++) for(var f=0;f<files;f++){
+          var t0=(q+.24)/cols,t1=(q+.76)/cols, z0=0.12+f*0.24, z1=z0+0.13;
+          if(z1>b.alt-0.03) continue;
+          var A,B,C,D;
+          if(c[1]){var va=b.v0+t0*(b.v1-b.v0),vb=b.v0+t1*(b.v1-b.v0);
+            A=i(c[0],va,z1);B=i(c[0],vb,z1);C=i(c[0],vb,z0);D=i(c[0],va,z0);}
+          else{var ua=b.u0+t0*(b.u1-b.u0),ub=b.u0+t1*(b.u1-b.u0);
+            A=i(ua,c[0],z1);B=i(ub,c[0],z1);C=i(ub,c[0],z0);D=i(ua,c[0],z0);}
+          var buida=rnd()<0.26;
+          var p=el('polygon',{points:pts(A,B,C,D),
+            fill:buida?'#d81f1f':'#5f5b52','fill-opacity':buida?0.9:(idx?0.55:0.7)});
+          p.style.opacity=0; p.style.transition='opacity .5s ease-out';
+          p.style.transitionDelay=(rnd()*400).toFixed(0)+'ms';
+          b.fin.appendChild(p);
+        }
+      });
+      requestAnimationFrame(function(){
+        b.fin.querySelectorAll('polygon').forEach(function(w){w.style.opacity=1;});});
+    }
+    illes.forEach(function(b){geo(b,0);});
+
+    function anima(){
+      var t0=performance.now(), PUJ=580;
+      (function marc(ara){
+        var t=ara-t0, viu=false;
+        illes.forEach(function(b){
+          var x=(t-b.retard)/PUJ;
+          if(x<0){geo(b,0);viu=true;return;}
+          if(x>=1){geo(b,b.alt);finestres(b);return;}
+          viu=true; geo(b,b.alt*(1-Math.pow(1-x,3)));
+        });
+        if(viu) requestAnimationFrame(marc);
+      })(t0);
+    }
+    if(quiet){ illes.forEach(function(b){geo(b,b.alt);finestres(b);}); }
+    else{ setTimeout(anima,250); }
+
+    /* Paral·laxi: la ciutat es mou menys que el text */
+    if(!quiet){
+      var txt=document.querySelector('.hb__portadaTxt'), tic=false;
+      addEventListener('scroll',function(){
+        if(tic) return; tic=true;
+        requestAnimationFrame(function(){
+          var y=Math.max(0,scrollY);
+          if(y<innerHeight*1.4){
+            cont.style.transform='translateX(-50%) translateY('+(y*0.22).toFixed(1)+'px)';
+            if(txt){ txt.style.transform='translateY('+(-y*0.16).toFixed(1)+'px)';
+                     txt.style.opacity=Math.max(0,1-y/(innerHeight*0.75)); }
+          }
+          tic=false;
+        });
+      },{passive:true});
+    }
+  })();
+
+
+  /* ============ 2 · JUAN ROIG: el mateix rebut ============ */
+  (function(){
+    var cont=document.getElementById('hb-roig'); if(!cont) return;
+    var svg=svgNou(cont,'0 0 720 380',
+      'Dues columnes idèntiques de 720 euros: una s\'omple en minuts, l\'altra tarda hores');
+    var M=Mon(64,64,360,128);
+
+    /* [DADES] 12.000.000 € bruts/any · SMI 16.576 € bruts/any · 1.800 h de jornada anual */
+    var LLOGUER=720, HORES=1800;
+    var minutsRoig=(LLOGUER/(12000000/HORES))*60;      // ≈ 6,5 min
+    var horesTu  = LLOGUER/(16576/HORES);              // ≈ 78 h
+
+    var cols=[
+      {cu:2,cv:8, pal:ROIG, dur:600,  fi:minutsRoig, unitat:'min',
+       nom:'Juan Roig', peu:'president de Mercadona'},
+      {cu:8,cv:2, pal:FOSC, dur:9000, fi:horesTu,    unitat:'h',
+       nom:'Tu, amb el SMI', peu:'salari mínim'}
+    ];
+    var NC=12, CH=0.34;
+
+    cols.forEach(function(C){
+      C.u0=C.cu-0.8;C.u1=C.cu+0.8;C.v0=C.cv-0.8;C.v1=C.cv+0.8;
+      var b=grup(svg); caixa(M,b,C.u0-0.14,C.u1+0.14,C.v0-0.14,C.v1+0.14,-0.14,0,SOL);
+      C.cubs=[];
+      for(var k=0;k<NC;k++){ var g=grup(svg); traç(g,'#8f8a7e'); g.n.style.opacity=0;
+        caixa(M,g,C.u0,C.u1,C.v0,C.v1,k*CH,k*CH+CH-0.04,C.pal); C.cubs.push(g); }
+      var q=M.iso(C.cu,C.cv,0);
+      C.tNom=el('text',{x:q[0],y:q[1]+38,'text-anchor':'middle',
+        'font-size':14,'font-weight':700,fill:'#f2f0eb'}); C.tNom.textContent=C.nom;
+      C.tVal=el('text',{x:q[0],y:q[1]+70,'text-anchor':'middle',
+        'font-size':26,'font-weight':800,fill:C.pal===ROIG?'#ec4b4b':'#cfccc4'});
+      C.tVal.textContent='0 '+C.unitat;
+      C.tPeu=el('text',{x:q[0],y:q[1]+90,'text-anchor':'middle',
+        'font-size':12,fill:'#8b877f'}); C.tPeu.textContent=C.peu;
+      svg.appendChild(C.tNom); svg.appendChild(C.tVal); svg.appendChild(C.tPeu);
+    });
+    var qm=M.iso(5,5,NC*CH+0.35);
+    var tEur=el('text',{x:qm[0],y:qm[1],'text-anchor':'middle',
+      'font-size':13,'letter-spacing':'.14em','font-weight':700,fill:'#8b877f'});
+    tEur.textContent='720 € · UN MES DE LLOGUER'; svg.appendChild(tEur);
+
+    function fixa(C,f){
+      var n=Math.round(NC*f);
+      C.cubs.forEach(function(g,k){ g.n.style.opacity = k<n ? 1 : 0; });
+      var v=C.fi*f;
+      C.tVal.textContent=(v<10?v.toFixed(1).replace('.',','):Math.round(v))+' '+C.unitat;
+    }
+    function anima(){
+      var t0=performance.now();
+      (function marc(ara){
+        var t=ara-t0, viu=false;
+        cols.forEach(function(C){
+          var x=Math.min(1,t/C.dur); if(x<1) viu=true;
+          fixa(C,x);
+        });
+        if(viu) requestAnimationFrame(marc);
+      })(t0);
+    }
+    cols.forEach(function(C){fixa(C,0);});
+    if(quiet){ cols.forEach(function(C){fixa(C,1);}); }
+    else alVeure(cont,anima);
+  })();
+
+
+  /* ============ 3 · LA PILA DELS 400 ============ */
+  (function(){
+    var cont=document.getElementById('hb-pila'); if(!cont) return;
+    var svg=svgNou(cont,'0 0 720 350','Un habitatge, trenta-set de mitjana i més de cent acumulats');
+    var M=Mon(44,44,360,92);
+    var grups=[
+      {bu:0, bv:10,n:1,  pal:ROIG,xifra:'1',   desc:'habitatge · tu'},
+      {bu:5, bv:5, n:37, pal:GRIS,xifra:'37',  desc:'de mitjana · 400 persones'},
+      {bu:10,bv:0, n:100,pal:GRIS,xifra:'100+',desc:'cadascuna · 20 persones'}
+    ];
+    var CH=0.55, cubs=[], ets=[];
+    grups.forEach(function(G){
+      var b=grup(svg); caixa(M,b,G.bu-0.1,G.bu+4.1,G.bv-0.1,G.bv+4.1,-0.16,0,SOL);
+      for(var i=0;i<G.n;i++){var k=Math.floor(i/16),r=i%16,cx=r%4,cy=Math.floor(r/4);
+        cubs.push({u0:G.bu+cx+0.05,u1:G.bu+cx+0.95,v0:G.bv+cy+0.05,v1:G.bv+cy+0.95,
+                   z:k*CH,pal:G.pal,prof:cx+cy+k,ordre:i});}
+    });
+    cubs.sort(function(a,b){return a.prof-b.prof;});
+    cubs.forEach(function(c){c.g=grup(svg);traç(c.g,'#8f8a7e');c.g.n.style.opacity=0;});
+    grups.forEach(function(G){
+      var q=M.iso(G.bu+2,G.bv+2,0);
+      var a=el('text',{x:q[0],y:q[1]+54,'text-anchor':'middle','font-size':26,
+        'font-weight':800,fill:'#d81f1f'}); a.textContent=G.xifra;
+      var b=el('text',{x:q[0],y:q[1]+74,'text-anchor':'middle','font-size':12.5,fill:'#4a4741'});
+      b.textContent=G.desc;
+      [a,b].forEach(function(t){t.style.opacity=0;t.style.transition='opacity .5s ease-out';
+        svg.appendChild(t);ets.push(t);});
+    });
+    function pinta(c,z,op){caixa(M,c.g,c.u0,c.u1,c.v0,c.v1,z,z+CH-0.05,c.pal);c.g.n.style.opacity=op;}
+    function anima(){
+      var t0=performance.now(),CAI=420,PAS=13;
+      (function marc(ara){
+        var t=ara-t0,viu=false;
+        cubs.forEach(function(c){
+          var x=(t-c.ordre*PAS)/CAI;
+          if(x<=0){c.g.n.style.opacity=0;viu=true;return;}
+          if(x>=1){pinta(c,c.z,1);return;}
+          viu=true;var e=1-Math.pow(1-x,3);pinta(c,c.z+1.4*(1-e),e);
+        });
+        if(viu) requestAnimationFrame(marc);
+      })(t0);
+      setTimeout(function(){ets.forEach(function(t){t.style.opacity=1;});},1500);
+    }
+    if(quiet){cubs.forEach(function(c){pinta(c,c.z,1);});ets.forEach(function(t){t.style.opacity=1;});}
+    else alVeure(cont,anima);
+  })();
+
+
+  /* ============ 4 · 450 → 720 ============ */
+  (function(){
+    var cont=document.getElementById('hb-preu'); if(!cont) return;
+    var svg=svgNou(cont,'0 0 720 320','El lloguer passa de 450 a 720 euros i els desnonaments pugen un 74 per cent');
+    var M=Mon(44,44,360,62);
+    var torres=[
+      {cu:2, cv:14,val:450,suf:' €',any:'2015',h:450/187.5,pal:GRIS},
+      {cu:6, cv:10,val:720,suf:' €',any:'ara', h:720/187.5,pal:ROIG},
+      {cu:10,cv:6, val:100,suf:'',  any:'2015',h:100/62.5, pal:GRIS},
+      {cu:14,cv:2, val:174,suf:'',  any:'ara', h:174/62.5, pal:ROIG}
+    ];
+    torres.forEach(function(T){
+      T.u0=T.cu-1;T.u1=T.cu+1;T.v0=T.cv-1;T.v1=T.cv+1;
+      var b=grup(svg); caixa(M,b,T.u0-0.15,T.u1+0.15,T.v0-0.15,T.v1+0.15,-0.14,0,SOL);
+    });
+    torres.forEach(function(T){
+      T.g=grup(svg); traç(T.g,'#8f8a7e');
+      var q=M.iso(T.cu,T.cv,0);
+      T.et=el('text',{x:q[0],y:q[1]+34,'text-anchor':'middle','font-size':22,'font-weight':800,
+        fill:T.pal===ROIG?'#d81f1f':'#4a4741'}); T.et.textContent='0'+T.suf;
+      var an=el('text',{x:q[0],y:q[1]+52,'text-anchor':'middle','font-size':12,fill:'#5f5e59'});
+      an.textContent=T.any; svg.appendChild(T.et); svg.appendChild(an);
+    });
+    function cap(x,txt,y,cls){var t=el('text',{x:x,y:y,'text-anchor':'middle','font-size':cls?14:11.5,
+      'letter-spacing':cls?'0':'.12em','font-weight':cls?800:700,fill:cls?'#d81f1f':'#4a4741'});
+      t.textContent=txt; if(cls){t.style.opacity=0;t.style.transition='opacity .6s ease-out';}
+      svg.appendChild(t); return t;}
+    var xA=360+((2-14)+(6-10))/2*22, xB=360+((10-6)+(14-2))/2*22;
+    cap(xA,'LLOGUER MENSUAL',22); cap(xB,'DESNONAMENTS · ÍNDEX 2015=100',22);
+    var dA=cap(xA,'+60%',44,1), dB=cap(xB,'+74%',44,1);
+    svg.appendChild(el('line',{x1:360,y1:30,x2:360,y2:280,stroke:'#d5d1c6','stroke-width':1,'stroke-dasharray':'3 4'}));
+    function pinta(T,f){caixa(M,T.g,T.u0,T.u1,T.v0,T.v1,0,Math.max(T.h*f,0.001),T.pal);
+      T.et.textContent=Math.round(T.val*f)+T.suf;}
+    function anima(){
+      var t0=performance.now(),DUR=1500;
+      (function marc(ara){
+        var x=(ara-t0)/DUR;
+        if(x>=1){torres.forEach(function(T){pinta(T,1);});dA.style.opacity=1;dB.style.opacity=1;return;}
+        var e=1-Math.pow(1-x,3); torres.forEach(function(T){pinta(T,e);});
+        requestAnimationFrame(marc);
+      })(t0);
+    }
+    torres.forEach(function(T){pinta(T,0);});
+    if(quiet){torres.forEach(function(T){pinta(T,1);});dA.style.opacity=1;dB.style.opacity=1;}
+    else alVeure(cont,anima);
+  })();
+
+
+  /* ============ 5 · EL PIS QUE ENCONGEIX ============ */
+  (function(){
+    var cont=document.getElementById('hb-pis'); if(!cont) return;
+    var pct=document.getElementById('hb-pis-pct'), txt=document.getElementById('hb-pis-txt');
+    var svg=svgNou(cont,'0 0 720 340','Plànol isomètric d\'un pis on el terra s\'omple de roig');
+    var M=Mon(62,29,286,40);
+    var P={forjat:{t:'#e6e2d9',d:'#d0ccc2',e:'#bab5a9'},
+           envà:{t:'#ffffff',d:'#ded9cf',e:'#c6c1b5'},
+           fusta:{t:'#cbbb9e',d:'#b3a285',e:'#998971'},
+           tèxtil:{t:'#b8b2a5',d:'#a29c8f',e:'#8a857a'},
+           blanc:{t:'#f5f4f1',d:'#dedad3',e:'#c5c1b8'}};
+    var T=0.16, AE=0.78, AI=0.7, i=M.iso;
+    var b0=grup(svg); caixa(M,b0,0,10,0,7,-0.22,0,P.forjat);
+    [[T,5.42,T,3.0,'#f1eee6'],[5.58,10,T,3.0,'#eae7de'],[T,10,3.16,4.2,'#edeae2'],
+     [T,2.92,4.36,7,'#e7ebea'],[3.08,6.42,4.36,7,'#f1ede4'],[6.58,10,4.36,7,'#f1ede4']
+    ].forEach(function(r){svg.appendChild(el('polygon',{fill:r[4],
+      points:pts(i(r[0],r[2],0.01),i(r[1],r[2],0.01),i(r[1],r[3],0.01),i(r[0],r[3],0.01))}));});
+
+    var raj=[];
+    for(var a=0;a<10;a++) for(var c=0;c<7;c++)
+      raj.push({s:a+c,el:el('polygon',{fill:'#d81f1f','fill-opacity':0,
+        points:pts(i(a,c,0.02),i(a+1,c,0.02),i(a+1,c+1,0.02),i(a,c+1,0.02))})});
+    raj.sort(function(x,y){return x.s-y.s;});
+    raj.forEach(function(r){r.el.style.transition='fill-opacity .45s ease-out';svg.appendChild(r.el);});
+
+    var murs=[[0,10,0,T,AE],[0,T,0,3.3,AE],[0,T,4.1,7,AE],
+      [T,2.0,3.0,3.16,AI],[2.9,7.0,3.0,3.16,AI],[7.9,10,3.0,3.16,AI],
+      [T,1.0,4.2,4.36,AI],[1.8,4.2,4.2,4.36,AI],[5.0,7.6,4.2,4.36,AI],[8.4,10,4.2,4.36,AI],
+      [5.42,5.58,T,3.0,AI],[2.92,3.08,4.36,7,AI],[6.42,6.58,4.36,7,AI]];
+    var mob=[[0.50,2.60,2.25,2.90,0.42,'tèxtil'],[0.50,2.60,2.72,2.90,0.78,'tèxtil'],
+      [0.90,2.10,1.30,1.95,0.35,'fusta'],[3.50,5.10,0.90,2.20,0.72,'fusta'],
+      [5.70,9.30,0.25,0.85,0.90,'blanc'],[9.40,9.95,0.25,0.95,1.05,'blanc'],
+      [6.30,8.30,1.70,2.40,0.85,'fusta'],[0.30,1.05,4.60,6.40,0.50,'blanc'],
+      [2.25,2.80,4.55,5.15,0.75,'blanc'],[3.50,5.00,4.70,6.70,0.48,'tèxtil'],
+      [5.80,6.35,4.60,6.60,1.05,'fusta'],[6.90,7.80,4.70,6.60,0.48,'tèxtil'],
+      [8.20,9.60,4.50,5.05,0.72,'fusta'],[8.30,9.70,6.10,6.70,1.05,'fusta']];
+    function tros(u0,u1,v0,v1,h,p){var o=[],du=u1-u0,dv=v1-v0,n,k;
+      if(du>=dv&&du>1.3){n=Math.ceil(du/1.3);for(k=0;k<n;k++)o.push([u0+du*k/n,u0+du*(k+1)/n,v0,v1,h,p]);}
+      else if(dv>du&&dv>1.3){n=Math.ceil(dv/1.3);for(k=0;k<n;k++)o.push([u0,u1,v0+dv*k/n,v0+dv*(k+1)/n,h,p]);}
+      else o.push([u0,u1,v0,v1,h,p]); return o;}
+    var peces=[];
+    murs.forEach(function(m){tros(m[0],m[1],m[2],m[3],m[4],'envà').forEach(function(p){peces.push(p);});});
+    mob.forEach(function(m){peces.push(m);});
+    peces.forEach(function(p){p.c=(p[0]+p[1])/2+(p[2]+p[3])/2;});
+    peces.sort(function(x,y){return x.c-y.c;});
+    peces.forEach(function(p){var g=grup(svg); if(p[5]!=='envà') traç(g,'#9d9789');
+      caixa(M,g,p[0],p[1],p[2],p[3],0,p[4],P[p[5]]);});
+
+    var F1=Math.round(70*0.33), F2=Math.round(70*0.68), temps=[], compta;
+    function omplir(de,a,pas){for(var k=de;k<a;k++)(function(k){
+      temps.push(setTimeout(function(){raj[k].el.setAttribute('fill-opacity',0.9);},(k-de)*pas));})(k);}
+    function comptar(de,a,ms){clearInterval(compta);var n=de;
+      compta=setInterval(function(){n++;pct.firstChild.nodeValue=n;if(n>=a)clearInterval(compta);},ms/(a-de));}
+    function anima(){
+      omplir(0,F1,60); comptar(0,33,F1*60);
+      temps.push(setTimeout(function(){
+        txt.textContent='si tens menys de 25 anys, això';
+        omplir(F1,F2,60); comptar(33,68,(F2-F1)*60);
+      },F1*60+1100));
+    }
+    if(quiet){for(var q=0;q<F2;q++)raj[q].el.setAttribute('fill-opacity',0.9);
+      pct.firstChild.nodeValue=68; txt.textContent='si tens menys de 25 anys';}
+    else alVeure(cont,anima);
+  })();
+
+
+  /* ============ 6 · L'ESCALA DE 16 ANYS ============ */
+  (function(){
+    var cont=document.getElementById('hb-escala'); if(!cont) return;
+    var marc=document.getElementById('hb-escala-anys');
+    var svg=svgNou(cont,'0 0 720 320','Escala de setze graons cap a una porta que s\'allunya');
+    var M=Mon(42,26,194,60);
+    var PEDRA={t:'#e4e0d6',d:'#cbc6bb',e:'#aea89c'};
+    var A=0.42, N=16, graons=[];
+    for(var k=0;k<N;k++) graons.push({u0:k,u1:k+1,v0:0,v1:2.2,h:(k+1)*A});
+    graons.push({u0:N,u1:N+2,v0:0,v1:2.2,h:N*A});
+    graons.forEach(function(s){s.g=grup(svg);traç(s.g,'#989285');
+      caixa(M,s.g,s.u0,s.u1,s.v0,s.v1,0,0.001,PEDRA);});
+    var porta=el('g',{}); porta.style.transition='transform 1.5s cubic-bezier(.5,0,.2,1)';
+    svg.appendChild(porta);
+    var pg=grup(porta), ZT=N*A;
+    caixa(M,pg,17.3,17.5,0.55,1.65,ZT,ZT+1.9,ROIG);
+    pg.n.style.opacity=0; pg.n.style.transition='opacity .7s ease-out';
+    var q=M.iso(17.4,1.1,ZT+2.4);
+    var avis=el('text',{x:q[0]+10,y:q[1],'text-anchor':'middle','font-size':13,'font-weight':800,
+      fill:'#d81f1f','paint-order':'stroke',stroke:'#f4f2ed','stroke-width':3.5,'stroke-linejoin':'round'});
+    avis.textContent='+24% el cost de viure'; avis.style.opacity=0;
+    avis.style.transition='opacity .6s ease-out'; svg.appendChild(avis);
+    function pinta(s,z){caixa(M,s.g,s.u0,s.u1,s.v0,s.v1,0,Math.max(z,0.001),PEDRA);}
+    function anima(){
+      var t0=performance.now(),PUJ=280,PAS=150;
+      (function mm(ara){
+        var t=ara-t0,viu=false;
+        graons.forEach(function(s,idx){var x=(t-idx*PAS)/PUJ;
+          if(x<0){pinta(s,0);viu=true;return;} if(x>=1){pinta(s,s.h);return;}
+          viu=true;pinta(s,s.h*(1-Math.pow(1-x,3)));});
+        if(marc) marc.textContent=Math.min(N,Math.max(0,Math.floor(t/PAS)));
+        if(viu) requestAnimationFrame(mm);
+      })(t0);
+      setTimeout(function(){pg.n.style.opacity=1;},N*PAS+300);
+      setTimeout(function(){
+        porta.style.transform='translate('+(4*21)+'px,'+(4*10.5-90)+'px)';
+        avis.style.opacity=1;
+      },N*PAS+1500);
+    }
+    graons.forEach(function(s){pinta(s,0);});
+    if(quiet){graons.forEach(function(s){pinta(s,s.h);});pg.n.style.opacity=1;
+      avis.style.opacity=1; if(marc)marc.textContent=N;}
+    else alVeure(cont,anima);
+  })();
+
+
+  /* ============ 7 · L'ENCAIX ============ */
+  (function(){
+    var cont=document.getElementById('hb-encaix'); if(!cont) return;
+    var svg=svgNou(cont,'0 0 720 350','Cases buides i persones sense casa que s\'ajunten');
+    var M=Mon(50,50,340,70), i=M.iso;
+    var MUR={t:'#efece5',d:'#ddd8ce',e:'#c4bfb4'};
+    var TB={t:'#f2eee7',d:'#e6e1d8'}, TP={t:'#e8654f',d:'#d81f1f'};
+    var COS={t:'#4a463f',d:'#38352f',e:'#282621'};
+    function poli(p,f,s){var e2=el('polygon',{fill:f});if(s){e2.setAttribute('stroke',s);
+      e2.setAttribute('stroke-width',.7);}p.appendChild(e2);return e2;}
+
+    var cases=[], gC=el('g',{}); svg.appendChild(gC);
+    for(var a=0;a<4;a++) for(var b=0;b<3;b++){
+      var u0=a*1.15, v0=6+b*1.15, g=el('g',{}); gC.appendChild(g);
+      var c={u0:u0,u1:u0+0.86,v0:v0,v1:v0+0.86,prof:u0+v0,g:g};
+      c.esq=poli(g,MUR.e,'#a9a396');c.dre=poli(g,MUR.d,'#a9a396');c.tap=poli(g,MUR.t,'#a9a396');
+      c.ves=poli(g,TB.d,'#c0392b');c.fro=poli(g,TB.t,'#c0392b');
+      cases.push(c);
+    }
+    cases.sort(function(x,y){return x.prof-y.prof;});
+    cases.forEach(function(c){gC.appendChild(c.g);});
+    function pintaC(c,z){
+      var h=0.5*z,r=0.92*z;
+      var A=i(c.u0,c.v0,h),B=i(c.u1,c.v0,h),C=i(c.u1,c.v1,h),D=i(c.u0,c.v1,h),
+          B0=i(c.u1,c.v0,0),C0=i(c.u1,c.v1,0),D0=i(c.u0,c.v1,0);
+      c.esq.setAttribute('points',pts(D,C,C0,D0));
+      c.dre.setAttribute('points',pts(B,C,C0,B0));
+      c.tap.setAttribute('points',pts(A,B,C,D));
+      var vm=(c.v0+c.v1)/2, K1=i(c.u0,vm,r),K2=i(c.u1,vm,r),
+          E1=i(c.u1,c.v1+0.09,h),E0=i(c.u0,c.v1+0.09,h);
+      c.ves.setAttribute('points',pts(K1,K2,E1,E0));
+      c.fro.setAttribute('points',pts(i(c.u1,c.v0,h),K2,E1));
+    }
+    function omple(c){c.ves.setAttribute('fill',TP.d);c.fro.setAttribute('fill',TP.t);
+      c.ves.setAttribute('stroke','#a81818');c.fro.setAttribute('stroke','#a81818');}
+    function buida(c){c.ves.setAttribute('fill',TB.d);c.fro.setAttribute('fill',TB.t);
+      c.ves.setAttribute('stroke','#c0392b');c.fro.setAttribute('stroke','#c0392b');}
+
+    var gent=[], gG=el('g',{});
+    gG.style.transition='transform 2s cubic-bezier(.5,0,.25,1),opacity 1.1s ease-in 1s';
+    svg.appendChild(gG);
+    for(var p1=0;p1<4;p1++) for(var p2=0;p2<3;p2++){
+      var pu=8+p1*1.15+0.26, pv=p2*1.15+0.26, g2=el('g',{}); gG.appendChild(g2);
+      var P2={u:pu,v:pv,prof:pu+pv,g:g2};
+      P2.cE=poli(g2,COS.e);P2.cD=poli(g2,COS.d);P2.cT=poli(g2,COS.t);
+      P2.hE=poli(g2,COS.e);P2.hD=poli(g2,COS.d);P2.hT=poli(g2,COS.t);
+      gent.push(P2);
+    }
+    gent.sort(function(x,y){return x.prof-y.prof;});
+    gent.forEach(function(p){gG.appendChild(p.g);});
+    function quad(o,pre,u0,u1,v0,v1,zb,zt){
+      var A=i(u0,v0,zt),B=i(u1,v0,zt),C=i(u1,v1,zt),D=i(u0,v1,zt),
+          B0=i(u1,v0,zb),C0=i(u1,v1,zb),D0=i(u0,v1,zb);
+      o[pre+'E'].setAttribute('points',pts(D,C,C0,D0));
+      o[pre+'D'].setAttribute('points',pts(B,C,C0,B0));
+      o[pre+'T'].setAttribute('points',pts(A,B,C,D));}
+    function pintaP(p,z){
+      quad(p,'c',p.u,p.u+0.34,p.v,p.v+0.34,0,Math.max(0.55*z,0.001));
+      quad(p,'h',p.u+0.04,p.u+0.30,p.v+0.04,p.v+0.30,0.58*z,Math.max(0.84*z,0.002));}
+
+    function etiq(x,y,t){var e2=el('text',{x:x,y:y,'text-anchor':'middle','font-size':12.5,
+      'font-weight':700,fill:'#4a4741','paint-order':'stroke',stroke:'#f4f2ed',
+      'stroke-width':3.5,'stroke-linejoin':'round'});e2.textContent=t;
+      e2.style.transition='opacity .5s ease-out';svg.appendChild(e2);return e2;}
+    var qc=i(2,9.3,0), qg=i(10,3.3,0);
+    var etC=etiq(qc[0],qc[1]+22,'cases sense gent'), etG=etiq(qg[0],qg[1]+22,'persones sense casa');
+
+    var DX=(-8-6)*25, DY=(-8+6)*12.5;
+    function anima(){
+      var t0=performance.now(),PUJ=460,PAS=70;
+      (function mm(ara){
+        var t=ara-t0,viu=false;
+        cases.forEach(function(c,k){var x=(t-k*PAS)/PUJ;
+          if(x<0){pintaC(c,0);viu=true;return;} if(x>=1){pintaC(c,1);return;}
+          viu=true;pintaC(c,1-Math.pow(1-x,3));});
+        gent.forEach(function(p,k){var x=(t-500-k*PAS)/PUJ;
+          if(x<0){pintaP(p,0);viu=true;return;} if(x>=1){pintaP(p,1);return;}
+          viu=true;pintaP(p,1-Math.pow(1-x,3));});
+        if(viu) requestAnimationFrame(mm);
+      })(t0);
+      var fi=500+gent.length*PAS+PUJ;
+      setTimeout(function(){
+        gG.style.transform='translate('+DX+'px,'+DY+'px)'; gG.style.opacity=0;
+        etC.style.opacity=0; etG.style.opacity=0;
+        cases.forEach(function(c,k){setTimeout(function(){omple(c);},900+k*70);});
+      },fi+500);
+    }
+    cases.forEach(function(c){pintaC(c,0);buida(c);});
+    gent.forEach(function(p){pintaP(p,0);});
+    if(quiet){cases.forEach(function(c){pintaC(c,1);omple(c);});gG.style.display='none';
+      etC.style.opacity=0;etG.style.opacity=0;}
+    else alVeure(cont,anima);
+  })();
+
+
+  /* ============ 8 · ÉS EL MERCADO, AMIGO: l'euro ============ */
+  (function(){
+    var cont=document.getElementById('hb-euro'); if(!cont) return;
+    var svg=svgNou(cont,'0 0 720 480','Un símbol d\'euro monumental que es construeix cub a cub');
+    var M=Mon(68,30,240,300);
+    var OR={t:'#f7d84f',d:'#e0bb2e',e:'#bd991c'};
+
+    /* El glif, dibuixat sobre una graella de 8 × 9 */
+    var GLIF=[
+      "..#####.",
+      ".##...##",
+      ".##.....",
+      "######..",
+      ".##.....",
+      "######..",
+      ".##.....",
+      ".##...##",
+      "..#####."
+    ];
+    var FILES=GLIF.length, cubs=[];
+    for(var r=0;r<FILES;r++) for(var c=0;c<GLIF[r].length;c++){
+      if(GLIF[r][c]!=='#') continue;
+      cubs.push({u:c, z:FILES-1-r, prof:c+(FILES-1-r)});
+    }
+    cubs.sort(function(a,b){return a.prof-b.prof;});
+    cubs.forEach(function(q){ q.g=grup(svg); traç(q.g,'#9c7c14'); q.g.n.style.opacity=0; });
+
+    function pinta(q,dz,op){
+      caixa(M,q.g,q.u,q.u+1,0,0.92,q.z+dz,q.z+dz+1,OR);
+      q.g.n.style.opacity=op;
+    }
+    function anima(){
+      var t0=performance.now(), CAI=420, PAS=42;
+      (function mm(ara){
+        var t=ara-t0, viu=false;
+        cubs.forEach(function(q,k){
+          var x=(t-k*PAS)/CAI;
+          if(x<=0){ q.g.n.style.opacity=0; viu=true; return; }
+          if(x>=1){ pinta(q,0,1); return; }
+          viu=true; var e=1-Math.pow(1-x,3);
+          pinta(q, 0.9*(1-e), e);
+        });
+        if(viu) requestAnimationFrame(mm);
+      })(t0);
+    }
+    cubs.forEach(function(q){pinta(q,0,0);});
+    if(quiet){ cubs.forEach(function(q){pinta(q,0,1);}); }
+    else alVeure(cont,anima);
+  })();
+
+
+  /* ============ 9 · VOLEM EL PA SENCER ============ */
+  (function(){
+    var cont=document.getElementById('hb-pa'); if(!cont) return;
+    var svg=svgNou(cont,'0 0 720 350','Una llesca sola i, després, el pa sencer format per totes les llesques');
+    var M=Mon(104,104,262,108);
+    var PA  ={t:'#f2d79d',d:'#dab876',e:'#bd9450'};
+    var TALL={t:'#a8763a',d:'#8f6230',e:'#754f26'};
+
+    var N=9, GRUIX=0.62, AMPLE=0.58;
+    var PERFIL=[[0,2.00,0,0.34],[0.14,1.86,0.34,0.62],[0.36,1.64,0.62,0.82]];
+    var llesques=[];
+
+    for(var k=0;k<N;k++){
+      var node=el('g',{}); svg.appendChild(node);
+      var L={u0:k*GRUIX, node:node, parts:[]};
+      PERFIL.forEach(function(p){
+        var b=grup(node); traç(b,'#9a7538');
+        L.parts.push({g:b,v0:p[0],v1:p[1],z0:p[2],z1:p[3]});
+      });
+      L.tall=grup(node); traç(L.tall,'#6d4a22');
+      node.style.opacity=0;
+      llesques.push(L);
+    }
+
+    function pinta(L,du,dz,op){
+      L.parts.forEach(function(p){
+        caixa(M,p.g,L.u0+du,L.u0+du+AMPLE,p.v0,p.v1,p.z0+dz,p.z1+dz,PA);
+      });
+      caixa(M,L.tall,L.u0+du+0.17,L.u0+du+0.30,0.55,1.45,0.80+dz,0.845+dz,TALL);
+      L.node.style.opacity=op;
+    }
+
+    function etiqueta(txt){
+      var t=el('text',{x:354,y:332,'text-anchor':'middle','font-size':15,
+        'font-weight':700,'letter-spacing':'.06em',fill:'#ffffff'});
+      t.textContent=txt; t.style.opacity=0; t.style.transition='opacity .6s ease-out';
+      svg.appendChild(t); return t;
+    }
+    var et1=etiqueta('el que ens donen'), et2=etiqueta('el que volem');
+
+    var ESPERA=1400, PAS=115, ENTRA=520;
+    function anima(){
+      pinta(llesques[0],0,0,1);
+      et1.style.opacity=1;
+      var t0=performance.now();
+      (function mm(ara){
+        var t=ara-t0-ESPERA, viu=false;
+        for(var k=1;k<N;k++){
+          var x=(t-(k-1)*PAS)/ENTRA;
+          if(x<=0){ llesques[k].node.style.opacity=0; viu=true; continue; }
+          if(x>=1){ pinta(llesques[k],0,0,1); continue; }
+          viu=true; var e=1-Math.pow(1-x,3);
+          pinta(llesques[k], 2.2*(1-e), 0.9*(1-e), Math.min(1,e*2));
+        }
+        if(viu) requestAnimationFrame(mm);
+      })(t0);
+      setTimeout(function(){ et1.style.opacity=0; }, ESPERA+200);
+      setTimeout(function(){ et2.style.opacity=1; }, ESPERA+(N-2)*PAS+ENTRA);
+    }
+
+    llesques.forEach(function(L){ pinta(L,0,0,0); });
+    if(quiet){ llesques.forEach(function(L){pinta(L,0,0,1);}); et2.style.opacity=1; }
+    else alVeure(cont,anima);
+  })();
+
+
+  /* ============ Revelat general en scroll ============ */
+  (function(){
+    var nodes=document.querySelectorAll('.hb-rev');
+    if(quiet){ nodes.forEach(function(n){n.classList.add('is-vis');}); return; }
+    var ob=new IntersectionObserver(function(en){
+      en.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('is-vis'); ob.unobserve(e.target); } });
+    },{threshold:.15,rootMargin:'0px 0px -8% 0px'});
+    nodes.forEach(function(n){ob.observe(n);});
+  })();
+
+})();
+</script>
+
+</body>
+</html>
