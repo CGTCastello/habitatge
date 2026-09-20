@@ -58,8 +58,10 @@
   border-left:1px solid #3a3733;}
 .cgt-cap .cgt-altra::after{content:" ↗";}
 .cgt-cap .cgt-altra:hover{opacity:1;color:var(--groc);}
+.cgt-curt{display:none;}
 @media(max-width:900px){.cgt-nom{display:none;}
-  .cgt-cap .cgt-altra{border-left:0;padding-left:0;font-size:.7rem;}}
+  .cgt-cap .cgt-altra{border-left:0;padding-left:0;font-size:.7rem;}
+  .cgt-llarg{display:none;}.cgt-curt{display:inline;}}
 
 /* peu */
 .cgt-peu{background:var(--negre);color:var(--blanc);border-top:4px solid var(--roig);
@@ -90,7 +92,9 @@
     <nav class="cgt-nav" aria-label="Pàgines">
       <a href="https://cgtcastello.org/afiliat" rel="noopener">Afilia't</a>
     </nav>
-    <a class="cgt-altra" href="https://observatori.cgtcastello.org/" rel="noopener">L'Observatori de l'Habitatge</a>
+    <a class="cgt-altra" href="https://observatori.cgtcastello.org/" rel="noopener"><span
+      class="cgt-llarg">L'Observatori de l'Habitatge</span><span
+      class="cgt-curt">L'Observatori</span></a>
   </div>
 </header>
 
@@ -151,7 +155,7 @@
 .hb__banda{padding:clamp(64px,11vw,120px) 0;}
 .hb__banda--negre{background:var(--negre);color:#f2f0eb;}
 .hb__banda--negre .hb__cos{color:#cfccc4;}
-.hb__banda--negre .hb__peu{color:#8b877f;}
+.hb__banda--negre .hb__peu{color:#a5a099;}
 .hb__banda--negre .hb__peu strong{color:#a8a49b;}
 .hb__banda--roig{background:var(--roig);color:#fff;}
 .hb__banda--roig .hb__cos{color:#ffe9e9;}
@@ -174,8 +178,11 @@
 
 /* ---------- Contenidors d'animació ---------- */
 .hb__anim{margin:34px 0 0;}
+/* les etiquetes dels SVG han de portar la tipografia del text, no la del
+   navegador: si no, les mides calculades ací no quadren */
+.hb__anim text{font-family:var(--text);}
 .hb__anim svg{display:block;width:100%;height:auto;}
-.hb__cartell{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:16px 0 0;}
+.hb__cartell{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin:22px 0 0;}
 .hb__gran{font-family:var(--titol);font-size:clamp(2.4rem,7.5vw,3.6rem);font-weight:400;
   color:var(--roig);font-variant-numeric:tabular-nums;line-height:1;}
 .hb__llegir{font-size:1rem;max-width:32ch;line-height:1.35;}
@@ -561,9 +568,11 @@
   /* ============ 2 · JUAN ROIG: el mateix rebut ============ */
   (function(){
     var cont=document.getElementById('hb-roig'); if(!cont) return;
-    var svg=svgNou(cont,'0 0 720 380',
+    var svg=svgNou(cont,'0 0 720 420',
       'Dues columnes idèntiques de 720 euros: una s\'omple en minuts, l\'altra tarda hores');
-    var M=Mon(64,64,360,128);
+    /* alçada de cub 56 i no 64: així el cim de les columnes queda per davall
+       del rètol de dalt i no el tapa */
+    var M=Mon(64,56,360,128);
 
     /* [DADES] 12.000.000 € bruts/any · SMI 16.576 € bruts/any · 1.800 h de jornada anual */
     var LLOGUER=720, HORES=1800;
@@ -585,18 +594,21 @@
       for(var k=0;k<NC;k++){ var g=grup(svg); traç(g,'#8f8a7e'); g.n.style.opacity=0;
         caixa(M,g,C.u0,C.u1,C.v0,C.v1,k*CH,k*CH+CH-0.04,C.pal); C.cubs.push(g); }
       var q=M.iso(C.cu,C.cv,0);
-      C.tNom=el('text',{x:q[0],y:q[1]+38,'text-anchor':'middle',
+      /* +62/+96/+118: per davall de la peanya isomètrica, que baixa ~44 px
+         per sota del centre de la base */
+      C.tNom=el('text',{x:q[0],y:q[1]+62,'text-anchor':'middle',
         'font-size':14,'font-weight':700,fill:'#f2f0eb'}); C.tNom.textContent=C.nom;
-      C.tVal=el('text',{x:q[0],y:q[1]+70,'text-anchor':'middle',
+      C.tVal=el('text',{x:q[0],y:q[1]+96,'text-anchor':'middle',
         'font-size':26,'font-weight':800,fill:C.pal===ROIG?'#ec4b4b':'#cfccc4'});
       C.tVal.textContent='0 '+C.unitat;
-      C.tPeu=el('text',{x:q[0],y:q[1]+90,'text-anchor':'middle',
-        'font-size':12,fill:'#8b877f'}); C.tPeu.textContent=C.peu;
+      C.tPeu=el('text',{x:q[0],y:q[1]+118,'text-anchor':'middle',
+        'font-size':12,fill:'#a5a099'}); C.tPeu.textContent=C.peu;
       svg.appendChild(C.tNom); svg.appendChild(C.tVal); svg.appendChild(C.tPeu);
     });
-    var qm=M.iso(5,5,NC*CH+0.35);
-    var tEur=el('text',{x:qm[0],y:qm[1],'text-anchor':'middle',
-      'font-size':13,'letter-spacing':'.14em','font-weight':700,fill:'#8b877f'});
+    /* el rètol del preu, a la cantonada de dalt: al centre el tapaven les
+       columnes quan arribaven a dalt de tot */
+    var tEur=el('text',{x:6,y:18,'text-anchor':'start',
+      'font-size':13,'letter-spacing':'.14em','font-weight':700,fill:'#a5a099'});
     tEur.textContent='720 € · UN MES DE LLOGUER'; svg.appendChild(tEur);
 
     function fixa(C,f){
@@ -625,7 +637,7 @@
   /* ============ 3 · LA PILA DELS 400 ============ */
   (function(){
     var cont=document.getElementById('hb-pila'); if(!cont) return;
-    var svg=svgNou(cont,'0 0 720 350','Un habitatge, trenta-set de mitjana i més de cent acumulats');
+    var svg=svgNou(cont,'0 0 720 390','Un habitatge, trenta-set de mitjana i més de cent acumulats');
     var M=Mon(44,44,360,92);
     var grups=[
       {bu:0, bv:10,n:1,  pal:ROIG,xifra:'1',   desc:'habitatge · tu'},
@@ -643,9 +655,9 @@
     cubs.forEach(function(c){c.g=grup(svg);traç(c.g,'#8f8a7e');c.g.n.style.opacity=0;});
     grups.forEach(function(G){
       var q=M.iso(G.bu+2,G.bv+2,0);
-      var a=el('text',{x:q[0],y:q[1]+54,'text-anchor':'middle','font-size':26,
+      var a=el('text',{x:q[0],y:q[1]+86,'text-anchor':'middle','font-size':26,
         'font-weight':800,fill:'#d81f1f'}); a.textContent=G.xifra;
-      var b=el('text',{x:q[0],y:q[1]+74,'text-anchor':'middle','font-size':12.5,fill:'#4a4741'});
+      var b=el('text',{x:q[0],y:q[1]+108,'text-anchor':'middle','font-size':12.5,fill:'#4a4741'});
       b.textContent=G.desc;
       [a,b].forEach(function(t){t.style.opacity=0;t.style.transition='opacity .5s ease-out';
         svg.appendChild(t);ets.push(t);});
@@ -673,7 +685,7 @@
   /* ============ 4 · 450 → 720 ============ */
   (function(){
     var cont=document.getElementById('hb-preu'); if(!cont) return;
-    var svg=svgNou(cont,'0 0 720 320','El lloguer passa de 450 a 720 euros i els desnonaments pugen un 74 per cent');
+    var svg=svgNou(cont,'0 0 720 360','El lloguer passa de 450 a 720 euros i els desnonaments pugen un 74 per cent');
     var M=Mon(44,44,360,62);
     var torres=[
       {cu:2, cv:14,val:450,suf:' €',any:'2015',h:450/187.5,pal:GRIS},
@@ -688,9 +700,9 @@
     torres.forEach(function(T){
       T.g=grup(svg); traç(T.g,'#8f8a7e');
       var q=M.iso(T.cu,T.cv,0);
-      T.et=el('text',{x:q[0],y:q[1]+34,'text-anchor':'middle','font-size':22,'font-weight':800,
+      T.et=el('text',{x:q[0],y:q[1]+56,'text-anchor':'middle','font-size':22,'font-weight':800,
         fill:T.pal===ROIG?'#d81f1f':'#4a4741'}); T.et.textContent='0'+T.suf;
-      var an=el('text',{x:q[0],y:q[1]+52,'text-anchor':'middle','font-size':12,fill:'#5f5e59'});
+      var an=el('text',{x:q[0],y:q[1]+76,'text-anchor':'middle','font-size':12,fill:'#5f5e59'});
       an.textContent=T.any; svg.appendChild(T.et); svg.appendChild(an);
     });
     function cap(x,txt,y,cls){var t=el('text',{x:x,y:y,'text-anchor':'middle','font-size':cls?14:11.5,
@@ -700,7 +712,7 @@
     var xA=360+((2-14)+(6-10))/2*22, xB=360+((10-6)+(14-2))/2*22;
     cap(xA,'LLOGUER MENSUAL',22); cap(xB,'DESNONAMENTS · ÍNDEX 2015=100',22);
     var dA=cap(xA,'+60%',44,1), dB=cap(xB,'+74%',44,1);
-    svg.appendChild(el('line',{x1:360,y1:30,x2:360,y2:280,stroke:'#d5d1c6','stroke-width':1,'stroke-dasharray':'3 4'}));
+    svg.appendChild(el('line',{x1:360,y1:30,x2:360,y2:320,stroke:'#d5d1c6','stroke-width':1,'stroke-dasharray':'3 4'}));
     function pinta(T,f){caixa(M,T.g,T.u0,T.u1,T.v0,T.v1,0,Math.max(T.h*f,0.001),T.pal);
       T.et.textContent=Math.round(T.val*f)+T.suf;}
     function anima(){
@@ -801,9 +813,10 @@
     var pg=grup(porta), ZT=N*A;
     caixa(M,pg,17.3,17.5,0.55,1.65,ZT,ZT+1.9,ROIG);
     pg.n.style.opacity=0; pg.n.style.transition='opacity .7s ease-out';
-    var q=M.iso(17.4,1.1,ZT+2.4);
-    var avis=el('text',{x:q[0]+10,y:q[1],'text-anchor':'middle','font-size':13,'font-weight':800,
-      fill:'#d81f1f','paint-order':'stroke',stroke:'#f4f2ed','stroke-width':3.5,'stroke-linejoin':'round'});
+    /* l'avís va a l'esquerra de la porta i a una alçada fixa: damunt de la
+       porta se'n eixia del marc, i sobre la porta no es llegia */
+    var avis=el('text',{x:498,y:46,'text-anchor':'end','font-size':13,'font-weight':800,
+      fill:'#d81f1f','paint-order':'stroke',stroke:'#f7f6f4','stroke-width':3.5,'stroke-linejoin':'round'});
     avis.textContent='+24% el cost de viure'; avis.style.opacity=0;
     avis.style.transition='opacity .6s ease-out'; svg.appendChild(avis);
     function pinta(s,z){caixa(M,s.g,s.u0,s.u1,s.v0,s.v1,0,Math.max(z,0.001),PEDRA);}
@@ -819,7 +832,7 @@
       })(t0);
       setTimeout(function(){pg.n.style.opacity=1;},N*PAS+300);
       setTimeout(function(){
-        porta.style.transform='translate('+(4*21)+'px,'+(4*10.5-90)+'px)';
+        porta.style.transform='translate(70px,-18px)';
         avis.style.opacity=1;
       },N*PAS+1500);
     }
@@ -891,7 +904,7 @@
       quad(p,'h',p.u+0.04,p.u+0.30,p.v+0.04,p.v+0.30,0.58*z,Math.max(0.84*z,0.002));}
 
     function etiq(x,y,t){var e2=el('text',{x:x,y:y,'text-anchor':'middle','font-size':12.5,
-      'font-weight':700,fill:'#4a4741','paint-order':'stroke',stroke:'#f4f2ed',
+      'font-weight':700,fill:'#4a4741','paint-order':'stroke',stroke:'#f7f6f4',
       'stroke-width':3.5,'stroke-linejoin':'round'});e2.textContent=t;
       e2.style.transition='opacity .5s ease-out';svg.appendChild(e2);return e2;}
     var qc=i(2,9.3,0), qg=i(10,3.3,0);
