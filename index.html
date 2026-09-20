@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>El preu de viure a Castelló · CGT</title>
 <meta name="description" content="Guia sobre l'estat de l'habitatge a Castelló i comarques. No ets tu: és el capitalisme.">
+<link rel="canonical" href="https://habitatge.cgtcastello.org/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Open+Sans:wght@400;600;700;800&display=swap">
 </head>
 <body style="margin:0">
 
@@ -13,28 +17,112 @@
      Tot va namespaced sota .hb — es pot pegar sencer en un
      Raw HTML de WPBakery sobre una plantilla en blanc.
      ============================================================ -->
-<div class="hb">
+<!-- ============================================================
+     Capçalera i peu compartits amb l'Observatori. Només per a la
+     versió autònoma (habitatge.cgtcastello.org): si algun dia es
+     pega el contingut en un Raw HTML de WPBakery, copia només el
+     bloc .hb — el tema de WordPress ja porta capçalera i peu.
+     ============================================================ -->
+<style>
+.cgt-marc{--roig:#d81f1f;--negre:#1b1a18;--blanc:#fff;--groc:#e9e84c;--linia:#e4e2dd;
+  --titol:"Anton","Arial Narrow",Impact,sans-serif;
+  --text:"Open Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-family:var(--text);}
+.cgt-marc *,.cgt-marc *::before,.cgt-marc *::after{box-sizing:border-box;}
+.cgt-marc a{color:inherit;}
+.cgt-int{max-width:1060px;margin:0 auto;padding:0 clamp(1.25rem,5vw,3rem);}
+
+/* capçalera: no fixa, perquè la portada ocupa tota la pantalla */
+.cgt-cap{background:var(--negre);color:var(--blanc);border-bottom:3px solid var(--roig);}
+.cgt-cap .cgt-int{display:flex;align-items:stretch;gap:1.2rem;}
+.cgt-marca{display:flex;align-items:center;gap:.7rem;color:var(--blanc);
+  padding:.55rem 0;flex-shrink:0;}
+.cgt-marca a{text-decoration:none;color:var(--blanc);}
+.cgt-marca a:hover{color:var(--groc);}
+.cgt-sigles:hover{color:var(--blanc);background:#b01818;}
+.cgt-sigles{background:var(--roig);color:var(--blanc);font-family:var(--titol);
+  font-size:1.35rem;letter-spacing:.06em;line-height:1;padding:.32rem .45rem .22rem;}
+.cgt-nom{font-family:var(--titol);text-transform:uppercase;font-size:.92rem;
+  line-height:1.06;letter-spacing:.5px;}
+.cgt-nav{display:flex;align-items:center;margin-left:auto;overflow-x:auto;
+  scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+.cgt-nav::-webkit-scrollbar{display:none;}
+.cgt-nav a{color:var(--blanc);text-decoration:none;white-space:nowrap;font-size:.78rem;
+  font-weight:700;letter-spacing:.03em;text-transform:uppercase;opacity:.85;
+  padding:1rem .6rem;border-bottom:3px solid transparent;margin-bottom:-3px;}
+.cgt-nav a:hover,.cgt-nav a:focus{opacity:1;border-bottom-color:var(--roig);}
+.cgt-nav a[aria-current]{opacity:1;border-bottom-color:var(--roig);}
+.cgt-cap .cgt-altra{display:flex;align-items:center;flex-shrink:0;color:var(--blanc);
+  text-decoration:none;white-space:nowrap;font-size:.72rem;font-weight:800;
+  letter-spacing:.06em;text-transform:uppercase;opacity:.7;padding-left:1.2rem;
+  border-left:1px solid #3a3733;}
+.cgt-cap .cgt-altra::after{content:" ↗";}
+.cgt-cap .cgt-altra:hover{opacity:1;color:var(--groc);}
+@media(max-width:900px){.cgt-nom{display:none;}
+  .cgt-cap .cgt-altra{border-left:0;padding-left:0;font-size:.7rem;}}
+
+/* peu */
+.cgt-peu{background:var(--negre);color:var(--blanc);border-top:4px solid var(--roig);
+  font-size:.85rem;padding:2.8rem 0 2.2rem;line-height:1.55;}
+.cgt-peu a{color:var(--blanc);text-decoration:none;}
+.cgt-peu a:hover,.cgt-peu a:focus{color:var(--groc);text-decoration:underline;}
+.cgt-graella{display:grid;gap:2rem 3rem;grid-template-columns:1fr;}
+@media(min-width:700px){.cgt-graella{grid-template-columns:1.4fr 1fr 1fr;}}
+.cgt-peu-titol{font-family:var(--titol);text-transform:uppercase;
+  font-size:clamp(1.5rem,3vw,2rem);line-height:1.02;letter-spacing:.5px;margin:0 0 .5rem;}
+.cgt-peu-sindicat{margin:0;color:#a8a49b;font-size:.8rem;text-transform:uppercase;
+  letter-spacing:.06em;font-weight:700;}
+.cgt-etiqueta{margin:0 0 .7rem;color:var(--roig);font-size:.72rem;font-weight:800;
+  letter-spacing:.12em;text-transform:uppercase;}
+.cgt-peu ul{list-style:none;margin:0;padding:0;}
+.cgt-peu li{margin:0 0 .45rem;}
+.cgt-llegal{margin:2.2rem 0 0;padding-top:1.2rem;border-top:1px solid #3a3733;
+  color:#a8a49b;font-size:.78rem;max-width:50rem;}
+</style>
+
+<header class="cgt-marc cgt-cap">
+  <div class="cgt-int">
+    <span class="cgt-marca">
+      <a class="cgt-sigles" href="https://cgtcastello.org" rel="noopener"
+         aria-label="CGT Castelló">CGT</a>
+      <a class="cgt-nom" href="#dalt">El preu de<br>viure a Castelló</a>
+    </span>
+    <nav class="cgt-nav" aria-label="Pàgines">
+      <a href="https://cgtcastello.org/afiliat" rel="noopener">Afilia't</a>
+    </nav>
+    <a class="cgt-altra" href="https://observatori.cgtcastello.org/" rel="noopener">L'Observatori de l'Habitatge</a>
+  </div>
+</header>
+
+<div class="hb" id="dalt">
 <style>
 /* ---------- Base ---------- */
-.hb{--fons:#f4f2ed;--roig:#d81f1f;--negre:#1b1a18;--gris:#5f5e59;--linia:#ddd9d0;
-  background:var(--fons);color:var(--negre);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+.hb{--fons:#f7f6f4;--roig:#d81f1f;--negre:#1b1a18;--gris:#5f5e59;--linia:#e4e2dd;
+  --groc:#e9e84c;
+  --titol:"Anton","Arial Narrow",Impact,sans-serif;
+  --text:"Open Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:var(--fons);color:var(--negre);font-family:var(--text);
   -webkit-font-smoothing:antialiased;overflow-x:hidden;}
 .hb *,.hb *::before,.hb *::after{box-sizing:border-box;}
 .hb p{line-height:1.62;}
-.hb__int{max-width:760px;margin:0 auto;padding:0 22px;}
+.hb__int{max-width:760px;margin:0 auto;padding:0 clamp(1.25rem,5vw,3rem);}
 .hb__estret{max-width:600px;}
 
 /* ---------- Tipografia ---------- */
-.hb__display{font-weight:300;letter-spacing:.01em;line-height:1.03;text-transform:uppercase;
-  font-size:clamp(2.4rem,8.5vw,5.2rem);margin:0;}
-.hb__h2{font-weight:300;letter-spacing:.02em;text-transform:uppercase;line-height:1.1;
-  font-size:clamp(1.7rem,4.6vw,2.7rem);margin:0 0 22px;}
+.hb__display{font-family:var(--titol);font-weight:400;letter-spacing:.01em;
+  line-height:.98;text-transform:uppercase;
+  font-size:clamp(2.6rem,9vw,6rem);margin:0;}
+.hb__h2{font-family:var(--titol);font-weight:400;letter-spacing:.02em;
+  text-transform:uppercase;line-height:1.05;
+  font-size:clamp(1.8rem,4.8vw,3rem);margin:0 0 22px;}
 .hb__dalt{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;
   color:var(--roig);margin:0 0 12px;}
 .hb__cos{font-size:1.06rem;color:#2e2c28;margin:0 0 18px;}
 .hb__peu{font-size:.83rem;color:var(--gris);line-height:1.55;margin:14px 0 0;}
 .hb__peu strong{color:#8a8378;font-weight:600;}
+.hb__cos strong{background:linear-gradient(transparent 58%,var(--groc) 58%);}
+.hb__banda--negre .hb__cos strong,.hb__banda--roig .hb__cos strong{
+  background:none;color:var(--groc);}
 
 /* ---------- Revelat en scroll ---------- */
 .hb-rev{opacity:0;transform:translateY(26px);
@@ -49,8 +137,9 @@
   text-transform:uppercase;margin:0 0 24px;}
 .hb__subtitol{font-size:clamp(1rem,2.6vw,1.25rem);color:var(--gris);max-width:34ch;
   margin:22px 0 0;line-height:1.5;}
-.hb__lema{margin:28px 0 0;font-size:clamp(1.15rem,3.4vw,1.6rem);font-weight:700;
-  text-transform:uppercase;letter-spacing:.02em;line-height:1.18;}
+.hb__lema{margin:28px 0 0;font-family:var(--titol);font-weight:400;
+  font-size:clamp(1.4rem,4vw,2.1rem);text-transform:uppercase;
+  letter-spacing:.02em;line-height:1.1;}
 .hb__lema span{color:var(--roig);}
 .hb__ciutat{position:absolute;left:50%;bottom:-2vh;width:150%;max-width:1500px;
   transform:translateX(-50%);z-index:1;pointer-events:none;}
@@ -69,16 +158,16 @@
 .hb__banda--roig .hb__dalt{color:#ffd7d7;}
 .hb__banda--roig .hb__peu{color:#ffc9c9;}
 .hb__banda--roig .hb__peu strong{color:#fff;}
-.hb__cita{font-size:clamp(1.5rem,4.4vw,2.4rem);font-weight:300;line-height:1.22;
-  text-transform:uppercase;letter-spacing:.02em;margin:0;}
+.hb__cita{font-family:var(--titol);font-size:clamp(1.7rem,4.8vw,2.8rem);font-weight:400;
+  line-height:1.1;text-transform:uppercase;letter-spacing:.02em;margin:0;}
 
 /* ---------- Punts numerats (els 9 del tríptic) ---------- */
 .hb__punt{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;
   padding:26px 0;border-top:1px solid var(--linia);}
 .hb__banda--negre .hb__punt{border-top-color:#39362f;}
 .hb__banda--roig .hb__punt{border-top-color:#f07d7d;}
-.hb__num{font-size:2.6rem;font-weight:300;line-height:.85;color:var(--roig);
-  font-variant-numeric:tabular-nums;}
+.hb__num{font-family:var(--titol);font-size:2.8rem;font-weight:400;line-height:.85;
+  color:var(--roig);font-variant-numeric:tabular-nums;}
 .hb__banda--negre .hb__num{color:var(--roig);}
 .hb__banda--roig .hb__num{color:#fff;}
 .hb__punt p{margin:0;font-size:1.02rem;}
@@ -87,16 +176,18 @@
 .hb__anim{margin:34px 0 0;}
 .hb__anim svg{display:block;width:100%;height:auto;}
 .hb__cartell{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:16px 0 0;}
-.hb__gran{font-size:clamp(2.2rem,7vw,3.2rem);font-weight:800;color:var(--roig);
-  font-variant-numeric:tabular-nums;line-height:1;}
+.hb__gran{font-family:var(--titol);font-size:clamp(2.4rem,7.5vw,3.6rem);font-weight:400;
+  color:var(--roig);font-variant-numeric:tabular-nums;line-height:1;}
 .hb__llegir{font-size:1rem;max-width:32ch;line-height:1.35;}
 
 /* ---------- Tancament ---------- */
 .hb__cta{padding:clamp(60px,10vw,110px) 0 clamp(70px,12vw,130px);text-align:left;}
 .hb__boto{display:inline-block;margin-top:26px;background:var(--roig);color:#fff;
-  text-decoration:none;padding:15px 30px;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;font-size:.85rem;border-radius:2px;}
-.hb__boto:hover{background:#b81919;}
+  text-decoration:none;padding:15px 30px;font-weight:800;letter-spacing:.08em;
+  text-transform:uppercase;font-size:.85rem;}
+.hb__boto:hover{background:#fff;color:var(--negre);}
+.hb__boto--groc{background:var(--groc);color:var(--negre);margin-left:8px;}
+.hb__boto--groc:hover{background:#fff;}
 .hb__boto:focus-visible{outline:3px solid var(--negre);outline-offset:3px;}
 .hb__contacte{margin:30px 0 0;font-size:.9rem;color:var(--gris);line-height:1.7;}
 
@@ -110,7 +201,6 @@
 <!-- ==================== PORTADA ==================== -->
 <header class="hb__portada">
   <div class="hb__int hb__portadaTxt">
-    <p class="hb__marca">CGT Castelló</p>
     <h1 class="hb__display">El preu de<br>viure a<br>Castelló</h1>
     <p class="hb__subtitol">Guia sobre l'estat de l'habitatge a Castelló i comarques.</p>
     <p class="hb__lema">No ets tu.<br><span>És el capitalisme.</span></p>
@@ -312,13 +402,44 @@
       l'Observatori de l'Habitatge de CGT i mira les dades que confirmen que any rere any la
       classe treballadora està més empobrida.</p>
     <a class="hb__boto hb-rev" href="https://observatori.cgtcastello.org/" rel="noopener">Visita l'Observatori</a>
-    <p class="hb__contacte hb-rev">
-      CGT Castelló · <a href="https://cgtcastello.org" style="color:#f2f0eb">cgtcastello.org</a>
-    </p>
+    <a class="hb__boto hb__boto--groc hb-rev" href="https://cgtcastello.org/afiliat" rel="noopener">Afilia't</a>
   </div>
 </section>
 
 </div><!-- /.hb -->
+
+<footer class="cgt-marc cgt-peu">
+  <div class="cgt-int">
+    <div class="cgt-graella">
+      <div>
+        <p class="cgt-peu-titol">El preu de<br>viure a Castelló</p>
+        <p class="cgt-peu-sindicat">CGT Castelló · Confederació General del Treball</p>
+      </div>
+      <nav aria-label="El sindicat">
+        <p class="cgt-etiqueta">El sindicat</p>
+        <ul>
+          <li><a href="https://cgtcastello.org" rel="noopener">cgtcastello.org</a></li>
+          <li><a href="https://cgtcastello.org/afiliat" rel="noopener">Afilia't</a></li>
+          <li><a href="https://cgtcastello.org/convenis" rel="noopener">Convenis col·lectius</a></li>
+          <li><a href="https://cgtcastello.org/guies" rel="noopener">Guies jurídiques</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Les dades">
+        <p class="cgt-etiqueta">Les dades</p>
+        <ul>
+          <li><a href="https://observatori.cgtcastello.org/" rel="noopener">Observatori de l'Habitatge</a></li>
+          <li><a href="https://observatori.cgtcastello.org/#calculadora" rel="noopener">Calculadora</a></li>
+          <li><a href="https://observatori.cgtcastello.org/#mapa" rel="noopener">Mapa per barris</a></li>
+          <li><a href="https://observatori.cgtcastello.org/#metodologia" rel="noopener">Metodologia i fonts</a></li>
+        </ul>
+      </nav>
+    </div>
+    <p class="cgt-llegal">Campanya d'habitatge de CGT Castelló. Les dades que
+      hi ha darrere d'estes xifres, amb font i any, a
+      <a href="https://observatori.cgtcastello.org/" rel="noopener">l'Observatori de
+      l'Habitatge</a>.</p>
+  </div>
+</footer>
 
 
 <script>
