@@ -146,9 +146,11 @@
 @media(max-height:820px){.hb__portada::after{height:74%;}}
 .hb__marca{font-size:.75rem;letter-spacing:.24em;font-weight:700;color:var(--roig);
   text-transform:uppercase;margin:0 0 24px;}
-.hb__subtitol{font-size:clamp(1rem,2.6vw,1.25rem);color:#4a4741;max-width:32ch;
-  margin:22px 0 0;line-height:1.5;}
-.hb__lema{margin:28px 0 0;font-family:var(--titol);font-weight:400;
+/* línia d'entrada damunt del titular: ací el fons sempre està net, mentre
+   que baix la trama urbana pujava i no es llegia */
+.hb__entrada{font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;
+  font-weight:700;color:var(--roig);margin:0 0 18px;max-width:48ch;line-height:1.7;}
+.hb__lema{margin:34px 0 0;font-family:var(--titol);font-weight:400;
   font-size:clamp(1.4rem,4vw,2.1rem);text-transform:uppercase;
   letter-spacing:.02em;line-height:1.1;}
 .hb__lema span{color:var(--roig);}
@@ -216,8 +218,8 @@
 <!-- ==================== PORTADA ==================== -->
 <header class="hb__portada">
   <div class="hb__int hb__portadaTxt">
+    <p class="hb__entrada">Guia sobre l'estat de l'habitatge a Castelló i comarques</p>
     <h1 class="hb__display">El preu de<br>viure a<br>Castelló</h1>
-    <p class="hb__subtitol">Guia sobre l'estat de l'habitatge a Castelló i comarques.</p>
     <p class="hb__lema">No ets tu.<br><span>És el capitalisme.</span></p>
   </div>
   <div class="hb__ciutat" id="hb-ciutat" aria-hidden="true"></div>
