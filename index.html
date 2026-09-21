@@ -208,6 +208,14 @@
 .hb__boto:focus-visible{outline:3px solid var(--negre);outline-offset:3px;}
 .hb__contacte{margin:30px 0 0;font-size:.9rem;color:var(--gris);line-height:1.7;}
 
+/* ---------- Tríptic per a descarregar ---------- */
+.hb__triptic{border-top:1px solid var(--linia);}
+.hb__descarrega{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin:6px 0 0;}
+.hb__descarrega .hb__boto{margin-top:0;}
+.hb__descarrega .hb__boto::after{content:" ↓";}
+.hb__fitxer{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;
+  font-weight:700;color:var(--gris);}
+
 @media (prefers-reduced-motion:reduce){
   .hb-rev{opacity:1;transform:none;transition:none;}
   .hb__ciutat{transform:translateX(-50%) !important;}
@@ -408,6 +416,22 @@
   <div class="hb__int">
     <h2 class="hb__h2 hb-rev">Ni gent sense casa.<br>Ni cases sense gent.</h2>
     <div class="hb__anim hb-rev" id="hb-encaix"></div>
+  </div>
+</section>
+
+<!-- ==================== TRÍPTIC ==================== -->
+<section class="hb__banda hb__triptic">
+  <div class="hb__int">
+    <p class="hb__dalt hb-rev">En paper</p>
+    <h2 class="hb__h2 hb-rev">Passa-ho de mà en mà.</h2>
+    <p class="hb__cos hb-rev hb__estret">Este contingut també és un tríptic per a
+      repartir al carrer, al tall, a la porta de l'institut o a la reunió de veïns.
+      Descarrega'l, imprimix-lo a doble cara i plega'l en tres.</p>
+    <p class="hb__descarrega hb-rev">
+      <a class="hb__boto" href="https://cgtcastello.org/wp-content/uploads/2026/09/Observatori-Habitatge-CGT-Triptic.pdf"
+         rel="noopener">Descarrega el tríptic</a>
+      <span class="hb__fitxer">PDF · 2 pàgines · 567 KB · A4 a doble cara</span>
+    </p>
   </div>
 </section>
 
