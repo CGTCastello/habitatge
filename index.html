@@ -415,7 +415,6 @@
 <section class="hb__banda">
   <div class="hb__int">
     <h2 class="hb__h2 hb-rev">Ni gent sense casa.<br>Ni cases sense gent.</h2>
-    <div class="hb__anim hb-rev" id="hb-encaix"></div>
   </div>
 </section>
 
@@ -877,102 +876,7 @@
   })();
 
 
-  /* ============ 7 · L'ENCAIX ============ */
-  (function(){
-    var cont=document.getElementById('hb-encaix'); if(!cont) return;
-    var svg=svgNou(cont,'0 0 720 350','Cases buides i persones sense casa que s\'ajunten');
-    var M=Mon(50,50,340,70), i=M.iso;
-    var MUR={t:'#efece5',d:'#ddd8ce',e:'#c4bfb4'};
-    var TB={t:'#f2eee7',d:'#e6e1d8'}, TP={t:'#e8654f',d:'#d81f1f'};
-    var COS={t:'#4a463f',d:'#38352f',e:'#282621'};
-    function poli(p,f,s){var e2=el('polygon',{fill:f});if(s){e2.setAttribute('stroke',s);
-      e2.setAttribute('stroke-width',.7);}p.appendChild(e2);return e2;}
-
-    var cases=[], gC=el('g',{}); svg.appendChild(gC);
-    for(var a=0;a<4;a++) for(var b=0;b<3;b++){
-      var u0=a*1.15, v0=6+b*1.15, g=el('g',{}); gC.appendChild(g);
-      var c={u0:u0,u1:u0+0.86,v0:v0,v1:v0+0.86,prof:u0+v0,g:g};
-      c.esq=poli(g,MUR.e,'#a9a396');c.dre=poli(g,MUR.d,'#a9a396');c.tap=poli(g,MUR.t,'#a9a396');
-      c.ves=poli(g,TB.d,'#c0392b');c.fro=poli(g,TB.t,'#c0392b');
-      cases.push(c);
-    }
-    cases.sort(function(x,y){return x.prof-y.prof;});
-    cases.forEach(function(c){gC.appendChild(c.g);});
-    function pintaC(c,z){
-      var h=0.5*z,r=0.92*z;
-      var A=i(c.u0,c.v0,h),B=i(c.u1,c.v0,h),C=i(c.u1,c.v1,h),D=i(c.u0,c.v1,h),
-          B0=i(c.u1,c.v0,0),C0=i(c.u1,c.v1,0),D0=i(c.u0,c.v1,0);
-      c.esq.setAttribute('points',pts(D,C,C0,D0));
-      c.dre.setAttribute('points',pts(B,C,C0,B0));
-      c.tap.setAttribute('points',pts(A,B,C,D));
-      var vm=(c.v0+c.v1)/2, K1=i(c.u0,vm,r),K2=i(c.u1,vm,r),
-          E1=i(c.u1,c.v1+0.09,h),E0=i(c.u0,c.v1+0.09,h);
-      c.ves.setAttribute('points',pts(K1,K2,E1,E0));
-      c.fro.setAttribute('points',pts(i(c.u1,c.v0,h),K2,E1));
-    }
-    function omple(c){c.ves.setAttribute('fill',TP.d);c.fro.setAttribute('fill',TP.t);
-      c.ves.setAttribute('stroke','#a81818');c.fro.setAttribute('stroke','#a81818');}
-    function buida(c){c.ves.setAttribute('fill',TB.d);c.fro.setAttribute('fill',TB.t);
-      c.ves.setAttribute('stroke','#c0392b');c.fro.setAttribute('stroke','#c0392b');}
-
-    var gent=[], gG=el('g',{});
-    gG.style.transition='transform 2s cubic-bezier(.5,0,.25,1),opacity 1.1s ease-in 1s';
-    svg.appendChild(gG);
-    for(var p1=0;p1<4;p1++) for(var p2=0;p2<3;p2++){
-      var pu=8+p1*1.15+0.26, pv=p2*1.15+0.26, g2=el('g',{}); gG.appendChild(g2);
-      var P2={u:pu,v:pv,prof:pu+pv,g:g2};
-      P2.cE=poli(g2,COS.e);P2.cD=poli(g2,COS.d);P2.cT=poli(g2,COS.t);
-      P2.hE=poli(g2,COS.e);P2.hD=poli(g2,COS.d);P2.hT=poli(g2,COS.t);
-      gent.push(P2);
-    }
-    gent.sort(function(x,y){return x.prof-y.prof;});
-    gent.forEach(function(p){gG.appendChild(p.g);});
-    function quad(o,pre,u0,u1,v0,v1,zb,zt){
-      var A=i(u0,v0,zt),B=i(u1,v0,zt),C=i(u1,v1,zt),D=i(u0,v1,zt),
-          B0=i(u1,v0,zb),C0=i(u1,v1,zb),D0=i(u0,v1,zb);
-      o[pre+'E'].setAttribute('points',pts(D,C,C0,D0));
-      o[pre+'D'].setAttribute('points',pts(B,C,C0,B0));
-      o[pre+'T'].setAttribute('points',pts(A,B,C,D));}
-    function pintaP(p,z){
-      quad(p,'c',p.u,p.u+0.34,p.v,p.v+0.34,0,Math.max(0.55*z,0.001));
-      quad(p,'h',p.u+0.04,p.u+0.30,p.v+0.04,p.v+0.30,0.58*z,Math.max(0.84*z,0.002));}
-
-    function etiq(x,y,t){var e2=el('text',{x:x,y:y,'text-anchor':'middle','font-size':12.5,
-      'font-weight':700,fill:'#4a4741','paint-order':'stroke',stroke:'#f7f6f4',
-      'stroke-width':3.5,'stroke-linejoin':'round'});e2.textContent=t;
-      e2.style.transition='opacity .5s ease-out';svg.appendChild(e2);return e2;}
-    var qc=i(2,9.3,0), qg=i(10,3.3,0);
-    var etC=etiq(qc[0],qc[1]+22,'cases sense gent'), etG=etiq(qg[0],qg[1]+22,'persones sense casa');
-
-    var DX=(-8-6)*25, DY=(-8+6)*12.5;
-    function anima(){
-      var t0=performance.now(),PUJ=460,PAS=70;
-      (function mm(ara){
-        var t=ara-t0,viu=false;
-        cases.forEach(function(c,k){var x=(t-k*PAS)/PUJ;
-          if(x<0){pintaC(c,0);viu=true;return;} if(x>=1){pintaC(c,1);return;}
-          viu=true;pintaC(c,1-Math.pow(1-x,3));});
-        gent.forEach(function(p,k){var x=(t-500-k*PAS)/PUJ;
-          if(x<0){pintaP(p,0);viu=true;return;} if(x>=1){pintaP(p,1);return;}
-          viu=true;pintaP(p,1-Math.pow(1-x,3));});
-        if(viu) requestAnimationFrame(mm);
-      })(t0);
-      var fi=500+gent.length*PAS+PUJ;
-      setTimeout(function(){
-        gG.style.transform='translate('+DX+'px,'+DY+'px)'; gG.style.opacity=0;
-        etC.style.opacity=0; etG.style.opacity=0;
-        cases.forEach(function(c,k){setTimeout(function(){omple(c);},900+k*70);});
-      },fi+500);
-    }
-    cases.forEach(function(c){pintaC(c,0);buida(c);});
-    gent.forEach(function(p){pintaP(p,0);});
-    if(quiet){cases.forEach(function(c){pintaC(c,1);omple(c);});gG.style.display='none';
-      etC.style.opacity=0;etG.style.opacity=0;}
-    else alVeure(cont,anima);
-  })();
-
-
-  /* ============ 8 · ÉS EL MERCADO, AMIGO: l'euro ============ */
+  /* ============ 7 · ÉS EL MERCADO, AMIGO: l'euro ============ */
   (function(){
     var cont=document.getElementById('hb-euro'); if(!cont) return;
     var svg=svgNou(cont,'0 0 720 480','Un símbol d\'euro monumental que es construeix cub a cub');
@@ -1023,7 +927,7 @@
   })();
 
 
-  /* ============ 9 · VOLEM EL PA SENCER ============ */
+  /* ============ 8 · VOLEM EL PA SENCER ============ */
   (function(){
     var cont=document.getElementById('hb-pa'); if(!cont) return;
     var svg=svgNou(cont,'0 0 720 350','Una llesca sola i, després, el pa sencer format per totes les llesques');
