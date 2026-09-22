@@ -214,6 +214,28 @@
 .hb__boto:focus-visible{outline:3px solid var(--negre);outline-offset:3px;}
 .hb__contacte{margin:30px 0 0;font-size:.9rem;color:var(--gris);line-height:1.7;}
 
+/* ---------- Calendari que perd fulls ---------- */
+.hb__calendari{margin:34px 0 0;perspective:1100px;}
+.hb__cal{position:relative;width:190px;height:226px;}
+.hb__calFull{position:absolute;inset:0;background:#fff;border:1px solid var(--linia);
+  box-shadow:6px 6px 0 rgba(27,26,24,.08);transform-origin:top center;
+  backface-visibility:hidden;display:flex;flex-direction:column;}
+.hb__calCap{height:44px;flex:0 0 44px;background:var(--roig);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.68rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;}
+.hb__calNum{flex:1;display:flex;align-items:center;justify-content:center;
+  font-family:var(--titol);font-size:4.6rem;line-height:1;color:var(--negre);}
+.hb__calPeu{flex:0 0 auto;min-height:36px;padding:6px 10px;display:flex;
+  align-items:center;justify-content:center;text-align:center;line-height:1.35;
+  font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--gris);border-top:1px solid var(--linia);}
+.hb__calAnella{position:absolute;top:-7px;width:10px;height:16px;border-radius:5px;
+  background:#b8b2a5;box-shadow:inset 0 -2px 0 rgba(0,0,0,.15);z-index:3;}
+.hb__calAnella--esq{left:38px;} .hb__calAnella--dre{right:38px;}
+.hb__calVola{z-index:2;transition:transform .42s cubic-bezier(.4,0,.6,1),opacity .42s ease-out;}
+@media(max-width:480px){.hb__cal{width:160px;height:196px;}
+  .hb__calNum{font-size:3.8rem;}}
+
 /* ---------- Tríptic per a descarregar ---------- */
 .hb__triptic{border-top:1px solid var(--linia);}
 .hb__descarrega{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin:6px 0 0;}
@@ -379,8 +401,10 @@
         24% mentrestant.</p>
     </div>
 
+    <div class="hb__calendari hb-rev" id="hb-calendari" aria-hidden="true"></div>
+
     <p class="hb__cartell hb-rev">
-      <span class="hb__gran">16</span>
+      <span class="hb__gran" id="hb-cal-anys">0</span>
       <span class="hb__llegir">anys estalviant el 10% del SMI cada mes, només per a l'entrada</span>
     </p>  </div>
 </section>
@@ -834,7 +858,56 @@
   })();
 
 
-  /* ============ 6 · ÉS EL MERCADO, AMIGO: l'euro ============ */
+  /* ============ 6 · EL CALENDARI QUE PERD FULLS ============ */
+  (function(){
+    var cont=document.getElementById('hb-calendari'); if(!cont) return;
+    var marc=document.getElementById('hb-cal-anys');
+    var N=16;
+
+    var cal=document.createElement('div'); cal.className='hb__cal';
+    cal.innerHTML='<span class="hb__calAnella hb__calAnella--esq"></span>' +
+                  '<span class="hb__calAnella hb__calAnella--dre"></span>';
+    cont.appendChild(cal);
+
+    function full(n){
+      var f=document.createElement('div'); f.className='hb__calFull';
+      f.innerHTML='<div class="hb__calCap">Any</div>' +
+                  '<div class="hb__calNum">'+n+'</div>' +
+                  '<div class="hb__calPeu">estalviant per a l\'entrada</div>';
+      return f;
+    }
+    var base=full(1); cal.appendChild(base);
+    if(marc) marc.textContent='0';
+
+    function passaFull(n){
+      // el full de dalt se'n va cap avall i deixa veure el següent
+      var vola=base;
+      base=full(n); cal.insertBefore(base,vola);
+      vola.classList.add('hb__calVola');
+      requestAnimationFrame(function(){
+        vola.style.transform='rotateX(-108deg)';
+        vola.style.opacity='0';
+      });
+      setTimeout(function(){ if(vola.parentNode) vola.parentNode.removeChild(vola); },460);
+      if(marc) marc.textContent=String(n-1);
+    }
+
+    function anima(){
+      var n=2, PAS=420;
+      (function seguent(){
+        if(n>N){ if(marc) marc.textContent=String(N); return; }
+        passaFull(n); n++;
+        setTimeout(seguent,PAS);
+      })();
+    }
+    if(quiet){
+      cal.removeChild(base); base=full(N); cal.appendChild(base);
+      if(marc) marc.textContent=String(N);
+    } else alVeure(cont,anima);
+  })();
+
+
+  /* ============ 7 · ÉS EL MERCADO, AMIGO: l'euro ============ */
   (function(){
     var cont=document.getElementById('hb-euro'); if(!cont) return;
     var svg=svgNou(cont,'0 0 720 480','Un símbol d\'euro monumental que es construeix cub a cub');
@@ -885,7 +958,7 @@
   })();
 
 
-  /* ============ 7 · VOLEM EL PA SENCER ============ */
+  /* ============ 8 · VOLEM EL PA SENCER ============ */
   (function(){
     var cont=document.getElementById('hb-pa'); if(!cont) return;
     var svg=svgNou(cont,'0 0 720 350','Una llesca sola i, després, el pa sencer format per totes les llesques');
