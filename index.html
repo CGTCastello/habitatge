@@ -373,9 +373,8 @@
         24% mentrestant.</p>
     </div>
 
-    <div class="hb__anim hb-rev" id="hb-escala"></div>
     <p class="hb__cartell hb-rev">
-      <span class="hb__gran" id="hb-escala-anys">0</span>
+      <span class="hb__gran">16</span>
       <span class="hb__llegir">anys estalviant el 10% del SMI cada mes, només per a l'entrada</span>
     </p>  </div>
 </section>
@@ -829,83 +828,7 @@
   })();
 
 
-  /* ============ 6 · SETZE ANYS, UNA RAJOLA PER ANY ============ */
-  (function(){
-    var cont=document.getElementById('hb-escala'); if(!cont) return;
-    var marc=document.getElementById('hb-escala-anys');
-    var svg=svgNou(cont,'0 0 720 330',
-      'Setze rajoles, una per cada any d\'estalvi, i quatre més que apareixen quan puja el cost de viure');
-    var M=Mon(100,44,390,52);
-    var ANYS={t:'#ec4b4b',d:'#d81f1f',e:'#ab1616'};
-    var BUIDA={t:'#eae7df',d:'#dbd7ce',e:'#c6c1b6'};
-    var MES  ={t:'#3b372f',d:'#2d2a25',e:'#211f1b'};
-    var COLS=4, FILES=4, GRUIX=0.14, PUJADA=0.55;
-
-    var rajoles=[];
-    for(var v=0;v<FILES;v++) for(var u=0;u<COLS;u++)
-      rajoles.push({u:u,v:v,ordre:v*COLS+u,prof:u+v,mes:false});
-    for(var k=0;k<COLS;k++)   // les que afegeix la pujada del cost de viure
-      rajoles.push({u:k,v:FILES,ordre:FILES*COLS+k,prof:k+FILES,mes:true});
-    rajoles.sort(function(a,b){return a.prof-b.prof;});
-    rajoles.forEach(function(r){ r.g=grup(svg); traç(r.g,'#a09a8d'); });
-
-    function pinta(r,alt,pal,op){
-      caixa(M,r.g,r.u+0.06,r.u+0.94,r.v+0.06,r.v+0.94,alt,alt+GRUIX,pal);
-      r.g.n.style.opacity=op;
-    }
-    /* al costat de les rajoles negres, que són les que explica */
-    var avis=el('text',{x:152,y:212,'text-anchor':'end','font-size':13,'font-weight':800,
-      fill:'#d81f1f','paint-order':'stroke',stroke:'#f7f6f4','stroke-width':3.5,
-      'stroke-linejoin':'round'});
-    avis.textContent='+24% el cost de viure';
-    avis.style.opacity=0; avis.style.transition='opacity .6s ease-out';
-    svg.appendChild(avis);
-
-    function repos(){   // totes buides i les negres, amagades
-      rajoles.forEach(function(r){ pinta(r,0,BUIDA,r.mes?0:1); });
-      if(marc) marc.textContent='0';
-    }
-    function final(){
-      rajoles.forEach(function(r){ pinta(r,0,r.mes?MES:ANYS,1); });
-      avis.style.opacity=1; if(marc) marc.textContent=String(COLS*FILES);
-    }
-    function anima(){
-      var t0=performance.now(), PAS=190, CAI=420;
-      (function marcAnim(ara){
-        var t=ara-t0, viu=false;
-        rajoles.forEach(function(r){
-          if(r.mes) return;
-          var x=(t-r.ordre*PAS)/CAI;
-          if(x<=0){ pinta(r,0,BUIDA,1); viu=true; return; }
-          if(x>=1){ pinta(r,0,ANYS,1); return; }
-          viu=true; var e=1-Math.pow(1-x,3);
-          pinta(r,PUJADA*(1-e),ANYS,1);   // cau al seu lloc
-        });
-        if(marc){
-          var fets=Math.max(0,Math.min(COLS*FILES,Math.floor(t/PAS)));
-          marc.textContent=String(fets);
-        }
-        if(viu) requestAnimationFrame(marcAnim);
-      })(t0);
-
-      // quan ja hi ha els setze anys, el cost de viure n'afegeix uns quants més
-      var fi=COLS*FILES*PAS+CAI;
-      rajoles.filter(function(r){return r.mes;}).forEach(function(r,i){
-        setTimeout(function(){
-          r.g.n.style.transition='opacity .5s ease-out';
-          pinta(r,0,MES,1);
-        }, fi+300+i*150);
-      });
-      setTimeout(function(){ avis.style.opacity=1; }, fi+300+COLS*150);
-    }
-
-    repos();
-    if(quiet) final();
-    else alVeure(cont,anima);
-  })();
-
-
-  /* ============ 7 · ÉS EL MERCADO, AMIGO: l'euro ============ */
+  /* ============ 6 · ÉS EL MERCADO, AMIGO: l'euro ============ */
   (function(){
     var cont=document.getElementById('hb-euro'); if(!cont) return;
     var svg=svgNou(cont,'0 0 720 480','Un símbol d\'euro monumental que es construeix cub a cub');
@@ -956,7 +879,7 @@
   })();
 
 
-  /* ============ 8 · VOLEM EL PA SENCER ============ */
+  /* ============ 7 · VOLEM EL PA SENCER ============ */
   (function(){
     var cont=document.getElementById('hb-pa'); if(!cont) return;
     var svg=svgNou(cont,'0 0 720 350','Una llesca sola i, després, el pa sencer format per totes les llesques');
