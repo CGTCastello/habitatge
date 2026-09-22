@@ -829,49 +829,78 @@
   })();
 
 
-  /* ============ 6 · L'ESCALA DE 16 ANYS ============ */
+  /* ============ 6 · SETZE ANYS, UNA RAJOLA PER ANY ============ */
   (function(){
     var cont=document.getElementById('hb-escala'); if(!cont) return;
     var marc=document.getElementById('hb-escala-anys');
-    var svg=svgNou(cont,'0 0 720 320','Escala de setze graons cap a una porta que s\'allunya');
-    var M=Mon(42,26,194,60);
-    var PEDRA={t:'#e4e0d6',d:'#cbc6bb',e:'#aea89c'};
-    var A=0.42, N=16, graons=[];
-    for(var k=0;k<N;k++) graons.push({u0:k,u1:k+1,v0:0,v1:2.2,h:(k+1)*A});
-    graons.push({u0:N,u1:N+2,v0:0,v1:2.2,h:N*A});
-    graons.forEach(function(s){s.g=grup(svg);traç(s.g,'#989285');
-      caixa(M,s.g,s.u0,s.u1,s.v0,s.v1,0,0.001,PEDRA);});
-    var porta=el('g',{}); porta.style.transition='transform 1.5s cubic-bezier(.5,0,.2,1)';
-    svg.appendChild(porta);
-    var pg=grup(porta), ZT=N*A;
-    caixa(M,pg,17.3,17.5,0.55,1.65,ZT,ZT+1.9,ROIG);
-    pg.n.style.opacity=0; pg.n.style.transition='opacity .7s ease-out';
-    /* l'avís va a l'esquerra de la porta i a una alçada fixa: damunt de la
-       porta se'n eixia del marc, i sobre la porta no es llegia */
-    var avis=el('text',{x:498,y:46,'text-anchor':'end','font-size':13,'font-weight':800,
-      fill:'#d81f1f','paint-order':'stroke',stroke:'#f7f6f4','stroke-width':3.5,'stroke-linejoin':'round'});
-    avis.textContent='+24% el cost de viure'; avis.style.opacity=0;
-    avis.style.transition='opacity .6s ease-out'; svg.appendChild(avis);
-    function pinta(s,z){caixa(M,s.g,s.u0,s.u1,s.v0,s.v1,0,Math.max(z,0.001),PEDRA);}
-    function anima(){
-      var t0=performance.now(),PUJ=280,PAS=150;
-      (function mm(ara){
-        var t=ara-t0,viu=false;
-        graons.forEach(function(s,idx){var x=(t-idx*PAS)/PUJ;
-          if(x<0){pinta(s,0);viu=true;return;} if(x>=1){pinta(s,s.h);return;}
-          viu=true;pinta(s,s.h*(1-Math.pow(1-x,3)));});
-        if(marc) marc.textContent=Math.min(N,Math.max(0,Math.floor(t/PAS)));
-        if(viu) requestAnimationFrame(mm);
-      })(t0);
-      setTimeout(function(){pg.n.style.opacity=1;},N*PAS+300);
-      setTimeout(function(){
-        porta.style.transform='translate(70px,-18px)';
-        avis.style.opacity=1;
-      },N*PAS+1500);
+    var svg=svgNou(cont,'0 0 720 330',
+      'Setze rajoles, una per cada any d\'estalvi, i quatre més que apareixen quan puja el cost de viure');
+    var M=Mon(100,44,390,52);
+    var ANYS={t:'#ec4b4b',d:'#d81f1f',e:'#ab1616'};
+    var BUIDA={t:'#eae7df',d:'#dbd7ce',e:'#c6c1b6'};
+    var MES  ={t:'#3b372f',d:'#2d2a25',e:'#211f1b'};
+    var COLS=4, FILES=4, GRUIX=0.14, PUJADA=0.55;
+
+    var rajoles=[];
+    for(var v=0;v<FILES;v++) for(var u=0;u<COLS;u++)
+      rajoles.push({u:u,v:v,ordre:v*COLS+u,prof:u+v,mes:false});
+    for(var k=0;k<COLS;k++)   // les que afegeix la pujada del cost de viure
+      rajoles.push({u:k,v:FILES,ordre:FILES*COLS+k,prof:k+FILES,mes:true});
+    rajoles.sort(function(a,b){return a.prof-b.prof;});
+    rajoles.forEach(function(r){ r.g=grup(svg); traç(r.g,'#a09a8d'); });
+
+    function pinta(r,alt,pal,op){
+      caixa(M,r.g,r.u+0.06,r.u+0.94,r.v+0.06,r.v+0.94,alt,alt+GRUIX,pal);
+      r.g.n.style.opacity=op;
     }
-    graons.forEach(function(s){pinta(s,0);});
-    if(quiet){graons.forEach(function(s){pinta(s,s.h);});pg.n.style.opacity=1;
-      avis.style.opacity=1; if(marc)marc.textContent=N;}
+    /* al costat de les rajoles negres, que són les que explica */
+    var avis=el('text',{x:152,y:212,'text-anchor':'end','font-size':13,'font-weight':800,
+      fill:'#d81f1f','paint-order':'stroke',stroke:'#f7f6f4','stroke-width':3.5,
+      'stroke-linejoin':'round'});
+    avis.textContent='+24% el cost de viure';
+    avis.style.opacity=0; avis.style.transition='opacity .6s ease-out';
+    svg.appendChild(avis);
+
+    function repos(){   // totes buides i les negres, amagades
+      rajoles.forEach(function(r){ pinta(r,0,BUIDA,r.mes?0:1); });
+      if(marc) marc.textContent='0';
+    }
+    function final(){
+      rajoles.forEach(function(r){ pinta(r,0,r.mes?MES:ANYS,1); });
+      avis.style.opacity=1; if(marc) marc.textContent=String(COLS*FILES);
+    }
+    function anima(){
+      var t0=performance.now(), PAS=190, CAI=420;
+      (function marcAnim(ara){
+        var t=ara-t0, viu=false;
+        rajoles.forEach(function(r){
+          if(r.mes) return;
+          var x=(t-r.ordre*PAS)/CAI;
+          if(x<=0){ pinta(r,0,BUIDA,1); viu=true; return; }
+          if(x>=1){ pinta(r,0,ANYS,1); return; }
+          viu=true; var e=1-Math.pow(1-x,3);
+          pinta(r,PUJADA*(1-e),ANYS,1);   // cau al seu lloc
+        });
+        if(marc){
+          var fets=Math.max(0,Math.min(COLS*FILES,Math.floor(t/PAS)));
+          marc.textContent=String(fets);
+        }
+        if(viu) requestAnimationFrame(marcAnim);
+      })(t0);
+
+      // quan ja hi ha els setze anys, el cost de viure n'afegeix uns quants més
+      var fi=COLS*FILES*PAS+CAI;
+      rajoles.filter(function(r){return r.mes;}).forEach(function(r,i){
+        setTimeout(function(){
+          r.g.n.style.transition='opacity .5s ease-out';
+          pinta(r,0,MES,1);
+        }, fi+300+i*150);
+      });
+      setTimeout(function(){ avis.style.opacity=1; }, fi+300+COLS*150);
+    }
+
+    repos();
+    if(quiet) final();
     else alVeure(cont,anima);
   })();
 
