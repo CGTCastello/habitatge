@@ -215,7 +215,12 @@
 .hb__contacte{margin:30px 0 0;font-size:.9rem;color:var(--gris);line-height:1.7;}
 
 /* ---------- Calendari que perd fulls ---------- */
-.hb__calendari{margin:34px 0 0;perspective:1100px;}
+.hb__calendari{margin:42px auto 8px;perspective:1100px;display:flex;
+  flex-direction:column;align-items:center;text-align:center;}
+.hb__calendari figcaption{margin:22px 0 0;max-width:30ch;font-size:.9rem;
+  font-weight:700;line-height:1.45;text-transform:uppercase;letter-spacing:.04em;
+  color:var(--negre);}
+.hb__calendari figcaption strong{color:var(--roig);font-weight:700;}
 .hb__cal{position:relative;width:190px;height:226px;}
 .hb__calFull{position:absolute;inset:0;background:#fff;border:1px solid var(--linia);
   box-shadow:6px 6px 0 rgba(27,26,24,.08);transform-origin:top center;
@@ -401,12 +406,11 @@
         24% mentrestant.</p>
     </div>
 
-    <div class="hb__calendari hb-rev" id="hb-calendari" aria-hidden="true"></div>
-
-    <p class="hb__cartell hb-rev">
-      <span class="hb__gran" id="hb-cal-anys">0</span>
-      <span class="hb__llegir">anys estalviant el 10% del SMI cada mes, només per a l'entrada</span>
-    </p>  </div>
+    <figure class="hb__calendari hb-rev">
+      <div id="hb-calendari" aria-hidden="true"></div>
+      <figcaption><strong id="hb-cal-anys">0</strong> anys estalviant el 10%
+        del SMI cada mes, només per a l'entrada</figcaption>
+    </figure>  </div>
 </section>
 
 
